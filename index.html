@@ -1566,6 +1566,223 @@ min-width:max-content;
 
 }
 
+/* ================= ADMIN PANEL ================= */
+
+.admin-panel{
+display:grid;
+grid-template-columns:280px 1fr;
+gap:28px;
+margin-top:40px;
+}
+
+.admin-sidebar{
+padding:28px;
+border-radius:34px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+height:fit-content;
+}
+
+.admin-logo{
+font-size:28px;
+font-weight:900;
+margin-bottom:34px;
+background:linear-gradient(135deg,#fff,#7aa2ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.admin-nav{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.admin-link{
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.05);
+cursor:pointer;
+font-weight:700;
+transition:.35s;
+}
+
+.admin-link:hover,
+.active-admin{
+background:linear-gradient(135deg,#6ea8ff,#8b5cf6);
+}
+
+.admin-main{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
+
+.admin-page{
+display:none;
+animation:fadeUp .5s ease;
+}
+
+.active-admin-page{
+display:block;
+}
+
+.admin-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:24px;
+}
+
+.admin-card{
+padding:30px;
+border-radius:28px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.admin-card-title{
+color:#94a3b8;
+margin-bottom:16px;
+}
+
+.admin-card h2{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.admin-box{
+padding:30px;
+border-radius:30px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.admin-box-title{
+font-size:24px;
+font-weight:800;
+margin-bottom:24px;
+}
+
+.admin-activity{
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+margin-bottom:14px;
+border:1px solid rgba(255,255,255,.05);
+}
+
+.project-form{
+display:grid;
+grid-template-columns:1fr 220px 180px;
+gap:16px;
+margin-bottom:24px;
+}
+
+.project-item{
+padding:20px;
+border-radius:22px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+margin-bottom:16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.project-info h3{
+margin-bottom:8px;
+}
+
+.project-status{
+padding:10px 16px;
+border-radius:999px;
+font-size:12px;
+font-weight:800;
+background:linear-gradient(135deg,#6ea8ff,#8b5cf6);
+}
+
+.delete-btn{
+padding:12px 18px;
+border:none;
+border-radius:14px;
+background:#ff4d6d;
+color:#fff;
+cursor:pointer;
+font-weight:700;
+}
+
+.admin-topbar{
+display:flex;
+justify-content:space-between;
+gap:20px;
+margin-bottom:24px;
+flex-wrap:wrap;
+}
+
+.admin-search{
+width:260px;
+padding:16px;
+border:none;
+outline:none;
+border-radius:18px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+color:#fff;
+}
+
+.analytics-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.analytic-item{
+padding:30px;
+border-radius:24px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+text-align:center;
+}
+
+.analytic-item h2{
+font-size:42px;
+margin-bottom:10px;
+}
+
+@media(max-width:980px){
+
+.admin-panel{
+grid-template-columns:1fr;
+}
+
+.project-form{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.admin-nav{
+flex-direction:row;
+overflow:auto;
+}
+
+.admin-link{
+white-space:nowrap;
+}
+
+.admin-search{
+width:100%;
+}
+
+}
+
 </style>
 </head>
 
@@ -1608,6 +1825,7 @@ Premium Web Experience
 <a href="#portfolio">Portfolio</a>
 <a href="#pricing">Pricing</a>
 <a href="#order">Order</a>
+<a href="#admin">Admin Panel</a>
 </div>
 
 <a href="#order" class="nav-btn">
@@ -2667,6 +2885,300 @@ Lanjut Pembayaran
 
 </section>
 
+<!-- ================= ADMIN PANEL ================= -->
+
+<section class="section" id="admin">
+
+<div class="container">
+
+<h2 class="section-title">
+DT Studio Admin Panel
+</h2>
+
+<p class="section-sub">
+Manage client project, payment, activity, dan realtime analytics dalam satu dashboard premium.
+</p>
+
+<div class="admin-panel">
+
+<!-- SIDEBAR -->
+
+<div class="admin-sidebar">
+
+<div class="admin-logo">
+⚡ DT ADMIN
+</div>
+
+<div class="admin-nav">
+
+<div class="admin-link active-admin" data-admin="overview">
+📊 Overview
+</div>
+
+<div class="admin-link" data-admin="projects">
+🚀 Projects
+</div>
+
+<div class="admin-link" data-admin="clients">
+👥 Clients
+</div>
+
+<div class="admin-link" data-admin="analytics">
+📈 Analytics
+</div>
+
+<div class="admin-link" data-admin="settings">
+⚙ Settings
+</div>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="admin-main">
+
+<!-- OVERVIEW -->
+
+<div class="admin-page active-admin-page" id="overview">
+
+<div class="admin-cards">
+
+<div class="admin-card">
+
+<div class="admin-card-title">
+Total Revenue
+</div>
+
+<h2 id="revenueCounter">
+Rp 0
+</h2>
+
+<p>
+Realtime income
+</p>
+
+</div>
+
+<div class="admin-card">
+
+<div class="admin-card-title">
+Active Projects
+</div>
+
+<h2 id="projectCounter">
+0
+</h2>
+
+<p>
+Project running
+</p>
+
+</div>
+
+<div class="admin-card">
+
+<div class="admin-card-title">
+New Clients
+</div>
+
+<h2 id="clientCounter">
+0
+</h2>
+
+<p>
+This month
+</p>
+
+</div>
+
+</div>
+
+<div class="admin-box">
+
+<div class="admin-box-title">
+Realtime Activity
+</div>
+
+<div id="adminActivity">
+
+<div class="admin-activity">
+🚀 DT Studio system started
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PROJECTS -->
+
+<div class="admin-page" id="projects">
+
+<div class="admin-box">
+
+<div class="admin-topbar">
+
+<div class="admin-box-title">
+Project Management
+</div>
+
+<input
+type="text"
+id="searchProject"
+class="admin-search"
+placeholder="Cari project..."
+>
+
+</div>
+
+<div class="project-form">
+
+<input
+type="text"
+id="projectName"
+class="input"
+placeholder="Nama project"
+>
+
+<select
+id="projectStatus"
+class="input"
+>
+
+<option>Pending</option>
+<option>Progress</option>
+<option>Completed</option>
+
+</select>
+
+<button
+class="btn btn-primary"
+id="addProjectBtn"
+>
+Tambah
+</button>
+
+</div>
+
+<div id="projectList">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CLIENT -->
+
+<div class="admin-page" id="clients">
+
+<div class="admin-box">
+
+<div class="admin-box-title">
+Client Database
+</div>
+
+<div class="admin-activity">
+👤 PT Luxury Property Indonesia
+</div>
+
+<div class="admin-activity">
+👤 Wedding Organizer Premium
+</div>
+
+<div class="admin-activity">
+👤 Nexora AI Startup
+</div>
+
+</div>
+
+</div>
+
+<!-- ANALYTICS -->
+
+<div class="admin-page" id="analytics">
+
+<div class="admin-box">
+
+<div class="admin-box-title">
+Realtime Analytics
+</div>
+
+<div class="analytics-grid">
+
+<div class="analytic-item">
+
+<h2 id="visitorCounter">
+0
+</h2>
+
+<span>Visitors</span>
+
+</div>
+
+<div class="analytic-item">
+
+<h2 id="leadCounter">
+0
+</h2>
+
+<span>Leads</span>
+
+</div>
+
+<div class="analytic-item">
+
+<h2 id="conversionCounter">
+0%
+</h2>
+
+<span>Conversion</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="admin-page" id="settings">
+
+<div class="admin-box">
+
+<div class="admin-box-title">
+Admin Settings
+</div>
+
+<div class="admin-activity">
+🌙 Dark mode active
+</div>
+
+<div class="admin-activity">
+🔔 Notification enabled
+</div>
+
+<div class="admin-activity">
+⚡ Realtime sync active
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- ================= CTA ================= -->
 
 <section class="cta">
@@ -3570,6 +4082,332 @@ navigator.onLine
 : '🔴 Offline';
 
 },3000);
+
+/* ================= ADMIN PANEL ================= */
+
+const adminLinks=document.querySelectorAll('.admin-link');
+const adminPages=document.querySelectorAll('.admin-page');
+
+adminLinks.forEach(link=>{
+
+link.addEventListener('click',()=>{
+
+adminLinks.forEach(l=>
+l.classList.remove('active-admin')
+);
+
+link.classList.add('active-admin');
+
+const target=link.dataset.admin;
+
+adminPages.forEach(page=>{
+
+page.classList.remove('active-admin-page');
+
+if(page.id===target){
+
+page.classList.add('active-admin-page');
+
+}
+
+});
+
+});
+
+});
+
+/* ================= DATABASE ================= */
+
+let projects=
+JSON.parse(localStorage.getItem('dt-projects'))
+|| [
+
+{
+name:'Luxury Property Website',
+status:'Progress'
+},
+
+{
+name:'Wedding Invitation Premium',
+status:'Completed'
+}
+
+];
+
+/* ================= RENDER PROJECT ================= */
+
+function renderProjects(filter=''){
+
+const projectList=
+document.getElementById('projectList');
+
+projectList.innerHTML='';
+
+projects
+.filter(project=>
+project.name.toLowerCase()
+.includes(filter.toLowerCase())
+)
+.forEach((project,index)=>{
+
+projectList.innerHTML+=`
+
+<div class="project-item">
+
+<div class="project-info">
+
+<h3>${project.name}</h3>
+
+<div class="project-status">
+${project.status}
+</div>
+
+</div>
+
+<button
+class="delete-btn"
+onclick="deleteProject(${index})"
+>
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById('projectCounter')
+.innerText=projects.length;
+
+localStorage.setItem(
+'dt-projects',
+JSON.stringify(projects)
+);
+
+}
+
+/* ================= DELETE ================= */
+
+function deleteProject(index){
+
+projects.splice(index,1);
+
+renderProjects();
+
+addAdminActivity(
+'🗑 Project deleted'
+);
+
+showIsland(
+'Project Removed',
+'Project berhasil dihapus'
+);
+
+}
+
+/* ================= ADD PROJECT ================= */
+
+document
+.getElementById('addProjectBtn')
+.addEventListener('click',()=>{
+
+const name=
+document.getElementById('projectName')
+.value;
+
+const status=
+document.getElementById('projectStatus')
+.value;
+
+if(!name) return;
+
+projects.unshift({
+name,
+status
+});
+
+renderProjects();
+
+document.getElementById('projectName')
+.value='';
+
+addAdminActivity(
+`🚀 New project added: ${name}`
+);
+
+showIsland(
+'Project Added',
+'New project berhasil ditambahkan 🚀'
+);
+
+});
+
+/* ================= SEARCH ================= */
+
+document
+.getElementById('searchProject')
+.addEventListener('input',(e)=>{
+
+renderProjects(e.target.value);
+
+});
+
+/* ================= ADMIN ACTIVITY ================= */
+
+function addAdminActivity(text){
+
+const box=
+document.getElementById('adminActivity');
+
+const item=document.createElement('div');
+
+item.className='admin-activity';
+
+item.innerHTML=text;
+
+box.prepend(item);
+
+if(box.children.length>8){
+
+box.removeChild(box.lastChild);
+
+}
+
+}
+
+/* ================= REALTIME ANALYTICS ================= */
+
+function animateAdmin(id,start,end,duration,prefix=''){
+
+const el=document.getElementById(id);
+
+let startTime=null;
+
+function update(currentTime){
+
+if(!startTime) startTime=currentTime;
+
+const progress=
+Math.min(
+(currentTime-startTime)/duration,
+1
+);
+
+const value=
+Math.floor(progress*(end-start)+start);
+
+el.innerText=
+prefix + value.toLocaleString();
+
+if(progress<1){
+
+requestAnimationFrame(update);
+
+}
+
+}
+
+requestAnimationFrame(update);
+
+}
+
+animateAdmin(
+'revenueCounter',
+0,
+28400000,
+3000,
+'Rp '
+);
+
+animateAdmin(
+'projectCounter',
+0,
+projects.length,
+1500
+);
+
+animateAdmin(
+'clientCounter',
+0,
+148,
+2200
+);
+
+animateAdmin(
+'visitorCounter',
+0,
+58294,
+2500
+);
+
+animateAdmin(
+'leadCounter',
+0,
+1842,
+2400
+);
+
+document
+.getElementById('conversionCounter')
+.innerText='78%';
+
+/* ================= REALTIME UPDATE ================= */
+
+setInterval(()=>{
+
+const revenue=
+document.getElementById('revenueCounter');
+
+let current=
+parseInt(
+revenue.innerText.replace(/\D/g,'')
+);
+
+current+=Math.floor(Math.random()*500000);
+
+revenue.innerText=
+'Rp ' + current.toLocaleString();
+
+const visitor=
+document.getElementById('visitorCounter');
+
+let v=
+parseInt(visitor.innerText.replace(/\D/g,''));
+
+v+=Math.floor(Math.random()*100);
+
+visitor.innerText=v.toLocaleString();
+
+},5000);
+
+/* ================= INITIAL ================= */
+
+renderProjects();
+
+/* ================= AUTO ACTIVITY ================= */
+
+const adminLogs=[
+
+'⚡ Server sync completed',
+'📱 Mobile optimization updated',
+'🚀 New client joined',
+'💎 UI premium animation added',
+'🔒 Security patch completed',
+'🧠 AI assistant upgraded'
+
+];
+
+setInterval(()=>{
+
+const random=
+adminLogs[
+Math.floor(Math.random()*adminLogs.length)
+];
+
+addAdminActivity(random);
+
+},8000);
 
 </script>
 
