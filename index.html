@@ -1520,6 +1520,52 @@ font-size:12px;
 color:#94a3b8;
 }
 
+.dashboard-page{
+display:none;
+animation:fadeUp .5s ease;
+}
+
+.active-page{
+display:block;
+}
+
+.menu-item{
+cursor:pointer;
+user-select:none;
+}
+
+.activity-item{
+transition:.3s;
+}
+
+.activity-item:hover{
+transform:translateX(6px);
+border-color:#7ea0ff;
+}
+
+.progress-fill{
+transition:width 1s ease;
+}
+
+@media(max-width:768px){
+
+.dashboard-sidebar{
+overflow-x:auto;
+}
+
+.dashboard-menu{
+flex-direction:row;
+overflow:auto;
+padding-bottom:4px;
+}
+
+.menu-item{
+white-space:nowrap;
+min-width:max-content;
+}
+
+}
+
 </style>
 </head>
 
@@ -1726,7 +1772,7 @@ Produk digital premium buatan DT Digital Studio dengan AI automation, realtime s
 <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://dt-pro-web.vercel.app/" class="visit-btn">Open Demo</a>
+<a href="https://dt-pro-web.vercel.app/" target="_blank" class="visit-btn">Open Demo</a>
 </div>
 
 <div class="portfolio-live">
@@ -1794,7 +1840,7 @@ Simulasi cicilan rumah realtime dengan bunga bank, tenor, DP, dan estimasi appro
 <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://dhitopropertyid.netlify.app/" class="visit-btn">Visit Website</a>
+<a href="https://dhitopropertyid.netlify.app/" target="_blank" class="visit-btn">Visit Website</a>
 </div>
 
 <div class="portfolio-live">
@@ -1862,7 +1908,7 @@ Website property modern dengan gallery premium, WhatsApp lead system, dan auto i
 <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://dhitoid.github.io/catatan-keuangan/" class="visit-btn">Open App</a>
+<a href="https://dhitoid.github.io/catatan-keuangan/" target="_blank" class="visit-btn">Open App</a>
 </div>
 
 <div class="portfolio-live">
@@ -1930,7 +1976,7 @@ Aplikasi tracking keuangan realtime dengan analytics cashflow modern dan install
 <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://dhitoid.github.io/sample-wedding/" class="visit-btn">View Invitation</a>
+<a href="https://dhitoid.github.io/sample-wedding/" target="_blank" class="visit-btn">View Invitation</a>
 </div>
 
 <div class="portfolio-live">
@@ -1998,7 +2044,7 @@ Undangan digital premium dengan backsound, RSVP, countdown, dan live gallery cou
 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://nexora-ai-generator.vercel.app/" class="visit-btn">Try AI</a>
+<a href="https://nexora-ai-generator.vercel.app/" target="_blank" class="visit-btn">Try AI</a>
 </div>
 
 <div class="portfolio-live">
@@ -2066,7 +2112,7 @@ AI tool untuk generate deskripsi property otomatis hanya dari input spesifikasi 
 <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
-<a href="https://dhitoid.github.io/dt-image-tools/" class="visit-btn">Generate Now</a>
+<a href="https://dhitoid.github.io/dt-image-tools/" target="_blank" class="visit-btn">Generate Now</a>
 </div>
 
 <div class="portfolio-live">
@@ -2147,6 +2193,8 @@ Client bisa memantau progress project, invoice, revisi, dan status website secar
 
 <div class="client-dashboard">
 
+<!-- SIDEBAR -->
+
 <div class="dashboard-sidebar">
 
 <div class="logo-wrap">
@@ -2174,23 +2222,23 @@ Realtime Dashboard
 
 <div class="dashboard-menu">
 
-<div class="menu-item active">
+<div class="menu-item active" data-tab="dashboard">
 📊 Dashboard
 </div>
 
-<div class="menu-item">
+<div class="menu-item" data-tab="progress">
 🚀 Project Progress
 </div>
 
-<div class="menu-item">
+<div class="menu-item" data-tab="revision">
 💬 Revision
 </div>
 
-<div class="menu-item">
+<div class="menu-item" data-tab="invoice">
 💳 Invoice
 </div>
 
-<div class="menu-item">
+<div class="menu-item" data-tab="settings">
 ⚙ Settings
 </div>
 
@@ -2198,7 +2246,13 @@ Realtime Dashboard
 
 </div>
 
+<!-- MAIN -->
+
 <div class="dashboard-main">
+
+<!-- DASHBOARD -->
+
+<div class="dashboard-page active-page" id="dashboard">
 
 <div class="dashboard-top">
 
@@ -2214,8 +2268,8 @@ Realtime client dashboard
 
 </div>
 
-<div class="dashboard-badge">
-Premium Access
+<div class="dashboard-badge" id="liveStatus">
+🟢 Live Connected
 </div>
 
 </div>
@@ -2228,14 +2282,12 @@ Premium Access
 Project Status
 </div>
 
-<h2>
+<h2 id="projectPercent">
 85%
 </h2>
 
 <div class="progress">
-
-<div class="progress-fill"></div>
-
+<div class="progress-fill" id="progressFill"></div>
 </div>
 
 </div>
@@ -2262,7 +2314,7 @@ UI Animation Review
 Payment
 </div>
 
-<h2>
+<h2 id="paymentStatus">
 Paid
 </h2>
 
@@ -2280,6 +2332,8 @@ Invoice completed
 Recent Activity
 </div>
 
+<div id="activityList">
+
 <div class="activity-item">
 ✅ Homepage UI Completed
 </div>
@@ -2294,6 +2348,116 @@ Recent Activity
 
 <div class="activity-item">
 🚀 Deployment Ready
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PROGRESS -->
+
+<div class="dashboard-page" id="progress">
+
+<div class="activity-box">
+
+<div class="activity-title">
+Development Timeline
+</div>
+
+<div class="activity-item">
+🎨 UI Design — Completed
+</div>
+
+<div class="activity-item">
+⚙ Backend Integration — 90%
+</div>
+
+<div class="activity-item">
+📱 Mobile Optimization — Completed
+</div>
+
+<div class="activity-item">
+🚀 Production Deploy — Pending
+</div>
+
+</div>
+
+</div>
+
+<!-- REVISION -->
+
+<div class="dashboard-page" id="revision">
+
+<div class="activity-box">
+
+<div class="activity-title">
+Revision Notes
+</div>
+
+<div class="activity-item">
+💬 Tambahkan animasi smooth pada hero section
+</div>
+
+<div class="activity-item">
+💬 Perbaiki spacing mobile dashboard
+</div>
+
+<div class="activity-item">
+💬 Optimize performance iPhone
+</div>
+
+</div>
+
+</div>
+
+<!-- INVOICE -->
+
+<div class="dashboard-page" id="invoice">
+
+<div class="activity-box">
+
+<div class="activity-title">
+Invoice Status
+</div>
+
+<div class="activity-item">
+💳 Invoice #DT-2026-001
+</div>
+
+<div class="activity-item">
+✅ Status: PAID
+</div>
+
+<div class="activity-item">
+📅 Paid at: 18 May 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- SETTINGS -->
+
+<div class="dashboard-page" id="settings">
+
+<div class="activity-box">
+
+<div class="activity-title">
+Client Settings
+</div>
+
+<div class="activity-item">
+🌙 Dark Mode Enabled
+</div>
+
+<div class="activity-item">
+🔔 Realtime Notification Active
+</div>
+
+<div class="activity-item">
+📲 PWA Installed
 </div>
 
 </div>
@@ -2686,28 +2850,6 @@ el.style.transform='translateY(40px)';
 el.style.transition='.8s ease';
 
 observer.observe(el);
-
-});
-
-/* ================= AUTO ORDER ================= */
-
-document
-.getElementById('orderForm')
-.addEventListener('submit',function(e){
-
-e.preventDefault();
-
-const message=
-`Halo DT Digital Studio 👋
-
-Saya ingin order website premium.
-
-Terima kasih 🙌`;
-
-window.open(
-`https://wa.me/6281802168184?text=${encodeURIComponent(message)}`,
-'_blank'
-);
 
 });
 
@@ -3239,7 +3381,7 @@ animateValue('imageGenerate',0,11822,3500);
 
 setInterval(()=>{
 
-const randomAdd=(id,max)=>{
+const randomAdd=(id,max,prefix='')=>{
 
 const el=document.getElementById(id);
 
@@ -3247,12 +3389,13 @@ if(!el) return;
 
 let current=
 parseInt(
-el.innerText.replace(/\D/g,'')
-);
+el.innerText.replace(/[^0-9]/g,'')
+) || 0;
 
 current+=Math.floor(Math.random()*max)+1;
 
-el.innerText=current.toLocaleString();
+el.innerText=
+prefix + current.toLocaleString();
 
 };
 
@@ -3263,6 +3406,7 @@ randomAdd('propertyView',30);
 randomAdd('propertyLead',3);
 
 randomAdd('financeUsers',2);
+randomAdd('financeMoney',2,'Rp ');
 
 randomAdd('guestCount',4);
 randomAdd('rsvpCount',2);
@@ -3271,6 +3415,161 @@ randomAdd('aiGenerate',40);
 randomAdd('imageGenerate',30);
 
 },4000);
+
+/* ================= DASHBOARD TAB ================= */
+
+const menuItems=document.querySelectorAll('.menu-item');
+const pages=document.querySelectorAll('.dashboard-page');
+
+menuItems.forEach(item=>{
+
+item.addEventListener('click',()=>{
+
+menuItems.forEach(i=>i.classList.remove('active'));
+item.classList.add('active');
+
+const target=item.dataset.tab;
+
+pages.forEach(page=>{
+
+page.classList.remove('active-page');
+
+if(page.id===target){
+
+page.classList.add('active-page');
+
+}
+
+});
+
+});
+
+});
+
+/* ================= REALTIME PROJECT PROGRESS ================= */
+
+let projectProgress=85;
+
+setInterval(()=>{
+
+if(projectProgress<100){
+
+projectProgress++;
+
+document.getElementById('projectPercent')
+.innerText=projectProgress+'%';
+
+document.getElementById('progressFill')
+.style.width=projectProgress+'%';
+
+if(projectProgress>=100){
+
+showIsland(
+'Project Complete 🚀',
+'Website siap deploy'
+);
+
+addActivity(
+'🚀 Website project completed successfully'
+);
+
+}
+
+}
+
+},12000);
+
+/* ================= ADD ACTIVITY ================= */
+
+function addActivity(text){
+
+const list=document.getElementById('activityList');
+
+if(!list) return;
+
+const item=document.createElement('div');
+
+item.className='activity-item';
+
+item.innerHTML=text;
+
+list.prepend(item);
+
+if(list.children.length>6){
+
+list.removeChild(list.lastChild);
+
+}
+
+}
+
+/* ================= RANDOM LIVE ACTIVITY ================= */
+
+const liveActivities=[
+
+'⚡ New animation rendered',
+'📱 Mobile UI optimized',
+'🎨 Hero section updated',
+'🚀 Deploy pipeline connected',
+'💎 Glassmorphism effect improved',
+'🔒 Security optimization completed',
+'🧠 AI assistant upgraded'
+
+];
+
+setInterval(()=>{
+
+const random=
+liveActivities[
+Math.floor(Math.random()*liveActivities.length)
+];
+
+addActivity(random);
+
+},10000);
+
+/* ================= SAVE DASHBOARD STATE ================= */
+
+menuItems.forEach(item=>{
+
+item.addEventListener('click',()=>{
+
+localStorage.setItem(
+'dt-dashboard-tab',
+item.dataset.tab
+);
+
+});
+
+});
+
+window.addEventListener('load',()=>{
+
+const saved=
+localStorage.getItem('dt-dashboard-tab');
+
+if(saved){
+
+document
+.querySelector(`.menu-item[data-tab="${saved}"]`)
+?.click();
+
+}
+
+});
+
+/* ================= ONLINE STATUS ================= */
+
+setInterval(()=>{
+
+const badge=document.getElementById('liveStatus');
+
+badge.innerHTML=
+navigator.onLine
+? '🟢 Live Connected'
+: '🔴 Offline';
+
+},3000);
 
 </script>
 
