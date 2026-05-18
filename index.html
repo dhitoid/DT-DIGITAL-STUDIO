@@ -1029,6 +1029,55 @@ opacity:0;
 
 }
 
+/* ================= VOICE VISUALIZER ================= */
+
+.waveform{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:4px;
+height:34px;
+margin-top:10px;
+}
+
+.wave{
+width:5px;
+height:10px;
+border-radius:999px;
+background:#8b5cf6;
+animation:waveAnim 1s ease-in-out infinite;
+}
+
+.wave:nth-child(2){
+animation-delay:.1s;
+}
+
+.wave:nth-child(3){
+animation-delay:.2s;
+}
+
+.wave:nth-child(4){
+animation-delay:.3s;
+}
+
+.wave:nth-child(5){
+animation-delay:.4s;
+}
+
+@keyframes waveAnim{
+
+0%,100%{
+height:10px;
+opacity:.5;
+}
+
+50%{
+height:34px;
+opacity:1;
+}
+
+}
+
 </style>
 </head>
 
@@ -1472,6 +1521,16 @@ DT AI Assistant
 <div class="chat-status">
 Online sekarang
 </div>
+
+<div class="waveform" id="waveform" style="display:none;">
+
+<div class="wave"></div>
+<div class="wave"></div>
+<div class="wave"></div>
+<div class="wave"></div>
+<div class="wave"></div>
+
+</div>
 </div>
 
 </div>
@@ -1867,6 +1926,40 @@ typing.remove();
 let reply=
 'Terima kasih sudah menghubungi DT Studio 🚀';
 
+let recommendedPackage='';
+
+if(
+msg.includes('umkm') ||
+msg.includes('jualan') ||
+msg.includes('landing page')
+){
+
+recommendedPackage='Starter';
+
+}
+
+else if(
+msg.includes('premium') ||
+msg.includes('bisnis') ||
+msg.includes('branding') ||
+msg.includes('company')
+){
+
+recommendedPackage='Business';
+
+}
+
+else if(
+msg.includes('dashboard') ||
+msg.includes('aplikasi') ||
+msg.includes('custom') ||
+msg.includes('ai')
+){
+
+recommendedPackage='Ultimate';
+
+}
+
 const msg=message.toLowerCase();
 
 if(msg.includes('harga')){
@@ -1915,6 +2008,30 @@ else if(msg.includes('halo')){
 
 reply=
 'Halo 👋 Ada yang bisa saya bantu tentang website premium DT Studio?';
+
+}
+
+if(recommendedPackage){
+
+reply+=`
+
+<br><br>
+
+✨ AI Recommendation:
+
+<div style="
+margin-top:14px;
+padding:16px;
+border-radius:20px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+">
+
+💎 Paket yang cocok:
+<b>${recommendedPackage}</b>
+
+</div>
+`;
 
 }
 
@@ -1978,18 +2095,29 @@ voiceBtn.classList.remove('active');
 /* ================= AI VOICE SPEAK ================= */
 
 function speakText(text){
-
 const speech=new SpeechSynthesisUtterance(text);
-
 speech.lang='id-ID';
-
 speech.rate=.96;
-
 speech.pitch=1;
-
 speech.volume=1;
-
+startWave();  speech.onend=()=>{  stopWave();
+};  
 window.speechSynthesis.speak(speech);
+}
+
+/* ================= WAVEFORM ================= */
+
+const waveform=document.getElementById('waveform');
+
+function startWave(){
+
+waveform.style.display='flex';
+
+}
+
+function stopWave(){
+
+waveform.style.display='none';
 
 }
 
