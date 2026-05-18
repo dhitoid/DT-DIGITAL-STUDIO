@@ -674,6 +674,55 @@ padding:28px;
 
 }
 
+.loader{
+position:fixed;
+inset:0;
+background:#030712;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+gap:24px;
+transition:1s;
+}
+
+.loader-logo{
+font-size:72px;
+font-weight:900;
+background:linear-gradient(135deg,#fff,#7aa2ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:pulse 2s infinite;
+}
+
+.loader-bar{
+width:220px;
+height:6px;
+border-radius:999px;
+background:rgba(255,255,255,.08);
+overflow:hidden;
+}
+
+.loader-progress{
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#6ea8ff,#8b5cf6);
+animation:load 2.5s ease forwards;
+}
+
+@keyframes load{
+to{
+width:100%;
+}
+}
+
+@keyframes pulse{
+50%{
+transform:scale(1.06);
+}
+}
+
 </style>
 </head>
 
@@ -1061,6 +1110,20 @@ Mulai Sekarang
 © 2026 DT Digital Studio — Premium Web Experience
 </footer>
 
+<!-- LOADER -->
+
+<div class="loader">
+
+<div class="loader-logo">
+DT
+</div>
+
+<div class="loader-bar">
+<div class="loader-progress"></div>
+</div>
+
+</div>
+
 <!-- ================= SCRIPT ================= -->
 
 <script>
@@ -1147,6 +1210,21 @@ document.querySelector('.blur.one')
 document.querySelector('.blur.two')
 .style.transform=
 `translate(-${x*30}px,-${y*30}px)`;
+
+});
+
+window.addEventListener('load',()=>{
+
+setTimeout(()=>{
+
+document.querySelector('.loader')
+.style.opacity='0';
+
+setTimeout(()=>{
+document.querySelector('.loader').remove();
+},1000);
+
+},2500);
 
 });
 
