@@ -1078,6 +1078,300 @@ opacity:1;
 
 }
 
+/* ================= PORTFOLIO ================= */
+
+.portfolio-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+gap:28px;
+}
+
+.portfolio-card{
+border-radius:34px;
+overflow:hidden;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+transition:.45s;
+position:relative;
+}
+
+.portfolio-card:hover{
+transform:translateY(-10px);
+border-color:#7ea0ff;
+box-shadow:
+0 25px 70px rgba(59,130,246,.16);
+}
+
+.portfolio-preview{
+position:relative;
+height:260px;
+overflow:hidden;
+}
+
+.portfolio-preview img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:1s;
+}
+
+.portfolio-card:hover img{
+transform:scale(1.08);
+}
+
+.portfolio-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(
+to top,
+rgba(3,7,18,.92),
+transparent
+);
+display:flex;
+align-items:flex-end;
+justify-content:center;
+padding:24px;
+opacity:0;
+transition:.4s;
+}
+
+.portfolio-card:hover .portfolio-overlay{
+opacity:1;
+}
+
+.visit-btn{
+padding:14px 22px;
+border-radius:18px;
+background:#fff;
+color:#000;
+text-decoration:none;
+font-weight:800;
+}
+
+.portfolio-content{
+padding:26px;
+}
+
+.portfolio-top{
+display:flex;
+justify-content:space-between;
+gap:20px;
+margin-bottom:20px;
+}
+
+.portfolio-top h3{
+font-size:24px;
+margin-bottom:8px;
+}
+
+.portfolio-top p{
+color:#94a3b8;
+font-size:14px;
+}
+
+.portfolio-status{
+padding:10px 16px;
+height:fit-content;
+border-radius:999px;
+background:linear-gradient(135deg,#6ea8ff,#8b5cf6);
+font-size:12px;
+font-weight:800;
+}
+
+.portfolio-tags{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.portfolio-tags span{
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.06);
+font-size:12px;
+color:#dbe4ff;
+}
+
+/* ================= CLIENT DASHBOARD ================= */
+
+.client-dashboard{
+display:grid;
+grid-template-columns:280px 1fr;
+gap:28px;
+padding:28px;
+border-radius:40px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+}
+
+.dashboard-sidebar{
+padding:24px;
+border-radius:28px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.dashboard-logo{
+font-size:28px;
+font-weight:900;
+margin-bottom:34px;
+background:linear-gradient(135deg,#fff,#7aa2ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.dashboard-menu{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.menu-item{
+padding:16px 18px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.05);
+font-weight:600;
+color:#dbe4ff;
+transition:.3s;
+}
+
+.menu-item.active,
+.menu-item:hover{
+background:linear-gradient(135deg,#6ea8ff,#8b5cf6);
+}
+
+.dashboard-main{
+padding:12px;
+}
+
+.dashboard-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:28px;
+gap:20px;
+}
+
+.dashboard-top h3{
+font-size:34px;
+margin-bottom:8px;
+}
+
+.dashboard-top p{
+color:#94a3b8;
+}
+
+.dashboard-badge{
+padding:14px 20px;
+border-radius:999px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+font-weight:700;
+}
+
+.dashboard-cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-bottom:24px;
+}
+
+.dash-card{
+padding:26px;
+border-radius:28px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.dash-title{
+font-size:14px;
+color:#94a3b8;
+margin-bottom:16px;
+}
+
+.dash-card h2{
+font-size:42px;
+margin-bottom:14px;
+}
+
+.progress{
+height:10px;
+border-radius:999px;
+background:rgba(255,255,255,.06);
+overflow:hidden;
+}
+
+.progress-fill{
+width:85%;
+height:100%;
+border-radius:999px;
+background:linear-gradient(90deg,#6ea8ff,#8b5cf6);
+animation:progressAnim 2s ease;
+}
+
+@keyframes progressAnim{
+from{
+width:0%;
+}
+}
+
+.dash-text{
+color:#94a3b8;
+line-height:1.7;
+}
+
+.activity-box{
+padding:28px;
+border-radius:28px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.activity-title{
+font-size:22px;
+font-weight:800;
+margin-bottom:22px;
+}
+
+.activity-item{
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+margin-bottom:14px;
+border:1px solid rgba(255,255,255,.05);
+color:#dbe4ff;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:980px){
+
+.client-dashboard{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.portfolio-preview{
+height:220px;
+}
+
+.dashboard-top{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.dashboard-top h3{
+font-size:28px;
+}
+
+}
+
 </style>
 </head>
 
@@ -1099,6 +1393,7 @@ DT Digital Studio
 <div class="nav-menu">
 <a href="#">Home</a>
 <a href="#services">Services</a>
+<a href="#portfolio">Portfolio</a>
 <a href="#pricing">Pricing</a>
 <a href="#order">Order</a>
 </div>
@@ -1232,6 +1527,322 @@ Website bisa diinstall seperti aplikasi di iPhone dan Android.
 <p>
 Sistem order otomatis dengan pembayaran QRIS, Dana, GoPay, dan transfer bank.
 </p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+
+<section class="section" id="portfolio">
+
+<div class="container">
+
+<h2 class="section-title">
+Portfolio Showcase
+</h2>
+
+<p class="section-sub">
+Beberapa project premium dari DT Digital Studio dengan tampilan modern, smooth animation, dan dashboard realtime.
+</p>
+
+<div class="portfolio-grid">
+
+<!-- CARD 1 -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1200&auto=format&fit=crop"
+alt="portfolio">
+
+<div class="portfolio-overlay">
+
+<a href="#" class="visit-btn">
+Live Preview
+</a>
+
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>Luxury Coffee Website</h3>
+<p>Modern Branding Website</p>
+</div>
+
+<div class="portfolio-status">
+LIVE
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+
+<span>Landing Page</span>
+<span>PWA</span>
+<span>Animation</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
+alt="portfolio">
+
+<div class="portfolio-overlay">
+
+<a href="#" class="visit-btn">
+Open Website
+</a>
+
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>Corporate Dashboard</h3>
+<p>Analytics & Admin Panel</p>
+</div>
+
+<div class="portfolio-status">
+NEW
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+
+<span>Dashboard</span>
+<span>Realtime</span>
+<span>Admin</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
+alt="portfolio">
+
+<div class="portfolio-overlay">
+
+<a href="#" class="visit-btn">
+Visit Site
+</a>
+
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>Digital Agency UI</h3>
+<p>Apple Inspired Experience</p>
+</div>
+
+<div class="portfolio-status">
+PRO
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+
+<span>Luxury UI</span>
+<span>Glassmorphism</span>
+<span>SEO</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= CLIENT AREA ================= -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+Client Area Dashboard
+</h2>
+
+<p class="section-sub">
+Client bisa memantau progress project, invoice, revisi, dan status website secara realtime.
+</p>
+
+<div class="client-dashboard">
+
+<div class="dashboard-sidebar">
+
+<div class="dashboard-logo">
+DT Client
+</div>
+
+<div class="dashboard-menu">
+
+<div class="menu-item active">
+📊 Dashboard
+</div>
+
+<div class="menu-item">
+🚀 Project Progress
+</div>
+
+<div class="menu-item">
+💬 Revision
+</div>
+
+<div class="menu-item">
+💳 Invoice
+</div>
+
+<div class="menu-item">
+⚙ Settings
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard-main">
+
+<div class="dashboard-top">
+
+<div>
+
+<h3>
+Project Monitoring
+</h3>
+
+<p>
+Realtime client dashboard
+</p>
+
+</div>
+
+<div class="dashboard-badge">
+Premium Access
+</div>
+
+</div>
+
+<div class="dashboard-cards">
+
+<div class="dash-card">
+
+<div class="dash-title">
+Project Status
+</div>
+
+<h2>
+85%
+</h2>
+
+<div class="progress">
+
+<div class="progress-fill"></div>
+
+</div>
+
+</div>
+
+<div class="dash-card">
+
+<div class="dash-title">
+Next Revision
+</div>
+
+<h2>
+Today
+</h2>
+
+<p class="dash-text">
+UI Animation Review
+</p>
+
+</div>
+
+<div class="dash-card">
+
+<div class="dash-title">
+Payment
+</div>
+
+<h2>
+Paid
+</h2>
+
+<p class="dash-text">
+Invoice completed
+</p>
+
+</div>
+
+</div>
+
+<div class="activity-box">
+
+<div class="activity-title">
+Recent Activity
+</div>
+
+<div class="activity-item">
+✅ Homepage UI Completed
+</div>
+
+<div class="activity-item">
+⚡ Motion Animation Added
+</div>
+
+<div class="activity-item">
+📱 Mobile Optimization Done
+</div>
+
+<div class="activity-item">
+🚀 Deployment Ready
+</div>
+
+</div>
+
 </div>
 
 </div>
