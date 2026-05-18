@@ -1723,6 +1723,11 @@ window.open(
 
 const chatToggle=document.getElementById('chatToggle');
 const chatbot=document.getElementById('chatbot');
+const sendBtn=document.getElementById('sendBtn');
+const chatInput=document.getElementById('chatInput');
+const chatBody=document.getElementById('chatBody');
+const voiceBtn=document.getElementById('voiceBtn');
+const waveform=document.getElementById('waveform');
 
 chatToggle.addEventListener('click',()=>{
 
@@ -1730,17 +1735,14 @@ chatbot.classList.toggle('active');
 
 });
 
-/* ================= SEND MESSAGE ================= */
-
-const sendBtn=document.getElementById('sendBtn');
-const chatInput=document.getElementById('chatInput');
-const chatBody=document.getElementById('chatBody');
+/* ================= ADD MESSAGE ================= */
 
 function addMessage(text,type){
 
 const msg=document.createElement('div');
 
 msg.className=`message ${type}`;
+
 msg.innerHTML=text;
 
 chatBody.appendChild(msg);
@@ -1748,6 +1750,188 @@ chatBody.appendChild(msg);
 chatBody.scrollTop=chatBody.scrollHeight;
 
 }
+
+/* ================= REALTIME AI TYPING ================= */
+
+function typeMessage(text,type='bot'){
+
+const msg=document.createElement('div');
+
+msg.className=`message ${type}`;
+
+const span=document.createElement('span');
+
+span.className='typing-text';
+
+msg.appendChild(span);
+
+chatBody.appendChild(msg);
+
+chatBody.scrollTop=chatBody.scrollHeight;
+
+let i=0;
+
+const speed=16;
+
+const typing=setInterval(()=>{
+
+span.innerHTML=text.slice(0,i);
+
+i++;
+
+chatBody.scrollTop=chatBody.scrollHeight;
+
+if(i>text.length){
+
+clearInterval(typing);
+
+span.classList.remove('typing-text');
+
+}
+
+},speed);
+
+}
+
+/* ================= AI PACKAGE RECOMMEND ================= */
+
+function detectPackage(msg){
+
+if(
+msg.includes('umkm') ||
+msg.includes('jualan') ||
+msg.includes('landing page') ||
+msg.includes('toko')
+){
+
+return 'Starter';
+
+}
+
+if(
+msg.includes('premium') ||
+msg.includes('bisnis') ||
+msg.includes('branding') ||
+msg.includes('company') ||
+msg.includes('corporate')
+){
+
+return 'Business';
+
+}
+
+if(
+msg.includes('dashboard') ||
+msg.includes('aplikasi') ||
+msg.includes('custom') ||
+msg.includes('ai') ||
+msg.includes('saas')
+){
+
+return 'Ultimate';
+
+}
+
+return '';
+
+}
+
+/* ================= AI RESPONSE ================= */
+
+function generateReply(message){
+
+const msg=message.toLowerCase();
+
+let reply=
+'Terima kasih sudah menghubungi DT Studio 🚀';
+
+if(msg.includes('harga')){
+
+reply=
+'Paket website tersedia mulai dari 299K hingga custom enterprise 💎';
+
+}
+
+else if(msg.includes('payment')){
+
+reply=
+'Kami menerima QRIS, DANA, GoPay, ShopeePay, dan transfer bank 💳';
+
+}
+
+else if(msg.includes('berapa lama')){
+
+reply=
+'Pengerjaan website biasanya sekitar 1-5 hari tergantung kompleksitas project ⚡';
+
+}
+
+else if(msg.includes('pwa')){
+
+reply=
+'Ya 👍 website bisa diinstall seperti aplikasi native di iPhone dan Android';
+
+}
+
+else if(msg.includes('seo')){
+
+reply=
+'Website sudah SEO optimized dan mobile friendly untuk membantu branding bisnis 🚀';
+
+}
+
+else if(msg.includes('admin')){
+
+reply=
+'Kami bisa membuat dashboard admin realtime sesuai kebutuhan bisnis kamu 📊';
+
+}
+
+else if(msg.includes('halo')){
+
+reply=
+'Halo 👋 Ada yang bisa saya bantu tentang website premium DT Studio?';
+
+}
+
+else if(msg.includes('website')){
+
+reply=
+'Kami menyediakan jasa website premium dengan design modern, Apple style animation, dan performa super cepat ✨';
+
+}
+
+const packageRecommend=detectPackage(msg);
+
+if(packageRecommend){
+
+reply += `
+
+<br><br>
+
+✨ AI Recommendation:
+
+<div style="
+margin-top:14px;
+padding:16px;
+border-radius:20px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+">
+
+💎 Paket yang cocok:
+<b>${packageRecommend}</b>
+
+</div>
+`;
+
+}
+
+return reply;
+
+}
+
+/* ================= BOT REPLY ================= */
 
 function botReply(message){
 
@@ -1771,58 +1955,19 @@ setTimeout(()=>{
 
 typing.remove();
 
-let reply=
-'Terima kasih sudah menghubungi DT Studio 🚀';
+const reply=generateReply(message);
 
-const msg=message.toLowerCase();
+typeMessage(reply,'bot');
 
-if(msg.includes('harga')){
+const cleanVoice=reply.replace(/<[^>]*>?/gm,'');
 
-reply=
-'Paket website mulai dari 299K hingga custom enterprise 💎';
+speakText(cleanVoice);
 
-}
-
-else if(msg.includes('payment')){
-
-reply=
-'Kami menerima QRIS, DANA, GoPay, dan transfer bank 💳';
+},1200);
 
 }
 
-else if(msg.includes('berapa lama')){
-
-reply=
-'Pengerjaan website biasanya 1-5 hari tergantung kebutuhan ⚡';
-
-}
-
-else if(msg.includes('pwa')){
-
-reply=
-'Ya 👍 website bisa diinstall seperti aplikasi iPhone & Android';
-
-}
-
-else if(msg.includes('seo')){
-
-reply=
-'Website sudah SEO friendly dan mobile optimized 🚀';
-
-}
-
-else if(msg.includes('admin')){
-
-reply=
-'Kami juga bisa membuat dashboard admin custom 📊';
-
-}
-
-addMessage(reply,'bot');
-
-},1500);
-
-}
+/* ================= SEND MESSAGE ================= */
 
 function sendMessage(){
 
@@ -1843,209 +1988,14 @@ sendBtn.addEventListener('click',sendMessage);
 chatInput.addEventListener('keypress',(e)=>{
 
 if(e.key==='Enter'){
+
 sendMessage();
+
 }
 
 });
 
-/* ================= AUTO POPUP ================= */
-
-setTimeout(()=>{
-
-showIsland(
-'DT AI Assistant',
-'AI Customer Service aktif 🚀'
-);
-
-},4000);
-
-/* ================= AI TYPING EFFECT ================= */
-
-function typeMessage(text,type){
-
-const msg=document.createElement('div');
-
-msg.className=`message ${type}`;
-
-const span=document.createElement('span');
-
-span.className='typing-text';
-
-msg.appendChild(span);
-
-chatBody.appendChild(msg);
-
-chatBody.scrollTop=chatBody.scrollHeight;
-
-let i=0;
-
-const typing=setInterval(()=>{
-
-span.innerHTML+=text.charAt(i);
-
-i++;
-
-chatBody.scrollTop=chatBody.scrollHeight;
-
-if(i>=text.length){
-
-clearInterval(typing);
-
-span.classList.remove('typing-text');
-
-}
-
-},18);
-
-}
-
-/* ================= BOT REPLY UPGRADE ================= */
-
-function botReply(message){
-
-const typing=document.createElement('div');
-
-typing.className='message bot';
-
-typing.innerHTML=`
-<div class="typing">
-<span></span>
-<span></span>
-<span></span>
-</div>
-`;
-
-chatBody.appendChild(typing);
-
-chatBody.scrollTop=chatBody.scrollHeight;
-
-setTimeout(()=>{
-
-typing.remove();
-
-let reply=
-'Terima kasih sudah menghubungi DT Studio 🚀';
-
-let recommendedPackage='';
-
-if(
-msg.includes('umkm') ||
-msg.includes('jualan') ||
-msg.includes('landing page')
-){
-
-recommendedPackage='Starter';
-
-}
-
-else if(
-msg.includes('premium') ||
-msg.includes('bisnis') ||
-msg.includes('branding') ||
-msg.includes('company')
-){
-
-recommendedPackage='Business';
-
-}
-
-else if(
-msg.includes('dashboard') ||
-msg.includes('aplikasi') ||
-msg.includes('custom') ||
-msg.includes('ai')
-){
-
-recommendedPackage='Ultimate';
-
-}
-
-const msg=message.toLowerCase();
-
-if(msg.includes('harga')){
-
-reply=
-'Paket website premium tersedia mulai dari 299K hingga enterprise custom 💎';
-
-}
-
-else if(msg.includes('payment')){
-
-reply=
-'Kami menerima QRIS, DANA, GoPay, ShopeePay, dan transfer bank 💳';
-
-}
-
-else if(msg.includes('berapa lama')){
-
-reply=
-'Pengerjaan website biasanya 1-5 hari tergantung tingkat kompleksitas ⚡';
-
-}
-
-else if(msg.includes('pwa')){
-
-reply=
-'Ya 👍 website bisa diinstall seperti aplikasi native di iPhone dan Android';
-
-}
-
-else if(msg.includes('seo')){
-
-reply=
-'Website sudah SEO optimized dan mobile friendly untuk meningkatkan branding 🚀';
-
-}
-
-else if(msg.includes('admin')){
-
-reply=
-'Kami bisa membuat dashboard admin realtime sesuai kebutuhan bisnis kamu 📊';
-
-}
-
-else if(msg.includes('halo')){
-
-reply=
-'Halo 👋 Ada yang bisa saya bantu tentang website premium DT Studio?';
-
-}
-
-if(recommendedPackage){
-
-reply+=`
-
-<br><br>
-
-✨ AI Recommendation:
-
-<div style="
-margin-top:14px;
-padding:16px;
-border-radius:20px;
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.08);
-">
-
-💎 Paket yang cocok:
-<b>${recommendedPackage}</b>
-
-</div>
-`;
-
-}
-
-typeMessage(reply,'bot');
-
-speakText(reply);
-
-},1200);
-
-}
-
 /* ================= VOICE AI ================= */
-
-const voiceBtn=document.getElementById('voiceBtn');
 
 const SpeechRecognition=
 window.SpeechRecognition ||
@@ -2059,28 +2009,29 @@ recognition.lang='id-ID';
 
 recognition.continuous=false;
 
-recognition.interimResults=false;
+recognition.interimResults=true;
 
-voiceBtn.addEventListener('click',()=>{
-
-recognition.start();
+recognition.onstart=()=>{
 
 voiceBtn.classList.add('active');
+
+startWave();
 
 showIsland(
 'Voice AI Active',
 'Silakan bicara... 🎤'
 );
 
-});
+};
 
 recognition.onresult=(event)=>{
 
-const text=event.results[0][0].transcript;
+const transcript=
+Array.from(event.results)
+.map(result=>result[0].transcript)
+.join('');
 
-chatInput.value=text;
-
-sendMessage();
+chatInput.value=transcript;
 
 };
 
@@ -2088,26 +2039,57 @@ recognition.onend=()=>{
 
 voiceBtn.classList.remove('active');
 
+stopWave();
+
+if(chatInput.value.trim()){
+
+sendMessage();
+
+}
+
 };
+
+voiceBtn.addEventListener('click',()=>{
+
+recognition.start();
+
+});
 
 }
 
 /* ================= AI VOICE SPEAK ================= */
 
 function speakText(text){
+
+window.speechSynthesis.cancel();
+
 const speech=new SpeechSynthesisUtterance(text);
+
 speech.lang='id-ID';
-speech.rate=.96;
+
+speech.rate=.95;
+
 speech.pitch=1;
+
 speech.volume=1;
-startWave();  speech.onend=()=>{  stopWave();
-};  
+
+speech.onstart=()=>{
+
+startWave();
+
+};
+
+speech.onend=()=>{
+
+stopWave();
+
+};
+
 window.speechSynthesis.speak(speech);
+
 }
 
-/* ================= WAVEFORM ================= */
-
-const waveform=document.getElementById('waveform');
+/* ================= VOICE WAVEFORM ================= */
 
 function startWave(){
 
@@ -2120,6 +2102,17 @@ function stopWave(){
 waveform.style.display='none';
 
 }
+
+/* ================= AUTO POPUP ================= */
+
+setTimeout(()=>{
+
+showIsland(
+'DT AI Assistant',
+'AI Customer Service aktif 🚀'
+);
+
+},4000);
 
 </script>
 
