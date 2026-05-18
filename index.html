@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+<title>DT Digital Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--bg:#050816;
+--card:#0d1224;
+--primary:#6ea8ff;
+--primary2:#8f6bff;
+--text:#ffffff;
+--muted:#a6b0cf;
+--line:rgba(255,255,255,.08);
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#2446ff33,transparent 30%),
+radial-gradient(circle at bottom right,#8b5cff33,transparent 30%);
+z-index:-1;
+}
+
+.container{
+width:100%;
+max-width:1200px;
+margin:auto;
+padding:0 20px;
+}
+
+header{
+padding:20px 0;
+position:sticky;
+top:0;
+backdrop-filter:blur(12px);
+background:rgba(5,8,22,.6);
+border-bottom:1px solid var(--line);
+z-index:999;
+}
+
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.logo{
+font-size:22px;
+font-weight:900;
+letter-spacing:.5px;
+background:linear-gradient(90deg,#fff,#7ca8ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.nav-btn{
+padding:12px 18px;
+border-radius:14px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+text-decoration:none;
+font-weight:700;
+color:#fff;
+font-size:14px;
+}
+
+.hero{
+padding:90px 0 70px;
+position:relative;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 16px;
+border-radius:999px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+font-size:13px;
+color:#dce5ff;
+margin-bottom:24px;
+}
+
+.hero h1{
+font-size:58px;
+line-height:1.05;
+font-weight:900;
+max-width:820px;
+margin-bottom:20px;
+}
+
+.hero h1 span{
+background:linear-gradient(135deg,#7ab0ff,#b28cff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+max-width:650px;
+color:var(--muted);
+font-size:18px;
+line-height:1.8;
+margin-bottom:35px;
+}
+
+.hero-action{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 24px;
+border-radius:18px;
+text-decoration:none;
+font-weight:700;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+transition:.3s;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+color:#fff;
+box-shadow:0 10px 30px rgba(111,136,255,.25);
+}
+
+.btn-secondary{
+border:1px solid rgba(255,255,255,.1);
+background:rgba(255,255,255,.04);
+color:#fff;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin-top:70px;
+}
+
+.stat{
+padding:26px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:24px;
+backdrop-filter:blur(10px);
+}
+
+.stat h2{
+font-size:34px;
+margin-bottom:6px;
+}
+
+.stat p{
+color:var(--muted);
+font-size:14px;
+}
+
+.section{
+padding:80px 0;
+}
+
+.section-title{
+font-size:40px;
+font-weight:900;
+margin-bottom:14px;
+}
+
+.section-sub{
+color:var(--muted);
+max-width:650px;
+line-height:1.7;
+margin-bottom:40px;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+padding:28px;
+border-radius:26px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:#7b95ff;
+}
+
+.icon{
+width:58px;
+height:58px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+margin-bottom:20px;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.card h3{
+font-size:22px;
+margin-bottom:12px;
+}
+
+.card p{
+color:var(--muted);
+line-height:1.7;
+font-size:15px;
+}
+
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:22px;
+}
+
+.price-card{
+padding:34px;
+border-radius:28px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+position:relative;
+overflow:hidden;
+}
+
+.price-card.popular{
+border-color:#7ea0ff;
+transform:scale(1.03);
+}
+
+.popular-badge{
+position:absolute;
+top:18px;
+right:18px;
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+background:#7ea0ff;
+color:#fff;
+}
+
+.price-title{
+font-size:24px;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.price{
+font-size:46px;
+font-weight:900;
+margin-bottom:18px;
+}
+
+.price span{
+font-size:16px;
+color:var(--muted);
+font-weight:500;
+}
+
+.feature{
+display:flex;
+gap:10px;
+margin-bottom:14px;
+color:#d7dfff;
+font-size:15px;
+}
+
+.cta{
+padding:90px 20px;
+text-align:center;
+}
+
+.cta-box{
+max-width:900px;
+margin:auto;
+padding:60px 30px;
+border-radius:36px;
+background:linear-gradient(135deg,#101937,#161d42);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.cta h2{
+font-size:48px;
+font-weight:900;
+margin-bottom:18px;
+}
+
+.cta p{
+max-width:650px;
+margin:auto;
+line-height:1.8;
+color:var(--muted);
+margin-bottom:32px;
+}
+
+footer{
+padding:40px 20px;
+text-align:center;
+color:var(--muted);
+border-top:1px solid rgba(255,255,255,.08);
+margin-top:40px;
+}
+
+@media(max-width:768px){
+
+.hero{
+padding-top:60px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.section-title{
+font-size:30px;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.cta h2{
+font-size:34px;
+}
+
+.price-card.popular{
+transform:none;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<div class="logo">
+DT Digital Studio
+</div>
+
+<a href="https://wa.me/6281234567890" class="nav-btn">
+Order Sekarang
+</a>
+
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+
+<div class="badge">
+🚀 Website Modern • UI Premium • Fast Response
+</div>
+
+<h1>
+Bantu Bisnis Kamu <span>Naik Level</span> Dengan Website Modern
+</h1>
+
+<p>
+Saya membantu UMKM, personal branding, dan bisnis online tampil lebih profesional lewat website modern yang cepat, aesthetic, dan bisa dibuka seperti aplikasi.
+</p>
+
+<div class="hero-action">
+
+<a href="https://wa.me/6281234567890" class="btn btn-primary">
+Chat WhatsApp
+</a>
+
+<a href="#pricing" class="btn btn-secondary">
+Lihat Harga
+</a>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2>50+</h2>
+<p>Project Selesai</p>
+</div>
+
+<div class="stat">
+<h2>24 Jam</h2>
+<p>Fast Response</p>
+</div>
+
+<div class="stat">
+<h2>100%</h2>
+<p>Mobile Friendly</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+
+<h2 class="section-title">
+Layanan Saya
+</h2>
+
+<p class="section-sub">
+Website modern dengan desain clean, premium, dan optimal untuk promosi bisnis maupun personal branding.
+</p>
+
+<div class="services">
+
+<div class="card">
+<div class="icon">🌐</div>
+<h3>Landing Page</h3>
+<p>
+Website modern untuk promosi produk, jasa, UMKM, dan personal branding.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">📱</div>
+<h3>PWA Website</h3>
+<p>
+Website bisa diinstall seperti aplikasi di Android dan iPhone.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">🎨</div>
+<h3>UI Design</h3>
+<p>
+Desain interface modern, clean, dan premium untuk kebutuhan digital.
+</p>
+</div>
+
+<div class="card">
+<div class="icon">⚡</div>
+<h3>Fast Website</h3>
+<p>
+Optimasi performa website agar ringan, cepat, dan nyaman digunakan.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="section" id="pricing">
+<div class="container">
+
+<h2 class="section-title">
+Harga Jasa
+</h2>
+
+<p class="section-sub">
+Harga fleksibel dan cocok untuk UMKM maupun personal branding.
+</p>
+
+<div class="pricing">
+
+<div class="price-card">
+
+<div class="price-title">
+Basic
+</div>
+
+<div class="price">
+150K
+<span>/project</span>
+</div>
+
+<div class="feature">✔ Landing page sederhana</div>
+<div class="feature">✔ Mobile responsive</div>
+<div class="feature">✔ Tombol WhatsApp</div>
+<div class="feature">✔ Revisi 1x</div>
+
+<br>
+
+<a href="https://wa.me/6281234567890" class="btn btn-secondary" style="width:100%;">
+Pilih Paket
+</a>
+
+</div>
+
+<div class="price-card popular">
+
+<div class="popular-badge">
+BEST
+</div>
+
+<div class="price-title">
+Premium
+</div>
+
+<div class="price">
+350K
+<span>/project</span>
+</div>
+
+<div class="feature">✔ Desain premium</div>
+<div class="feature">✔ Animasi modern</div>
+<div class="feature">✔ SEO basic</div>
+<div class="feature">✔ PWA install app</div>
+<div class="feature">✔ Revisi 3x</div>
+
+<br>
+
+<a href="https://wa.me/6281234567890" class="btn btn-primary" style="width:100%;">
+Pilih Paket
+</a>
+
+</div>
+
+<div class="price-card">
+
+<div class="price-title">
+Custom
+</div>
+
+<div class="price">
+Chat
+<span>langsung</span>
+</div>
+
+<div class="feature">✔ Website custom</div>
+<div class="feature">✔ Dashboard admin</div>
+<div class="feature">✔ Tools website</div>
+<div class="feature">✔ Request fitur bebas</div>
+
+<br>
+
+<a href="https://wa.me/6281234567890" class="btn btn-secondary" style="width:100%;">
+Konsultasi
+</a>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="cta">
+
+<div class="cta-box">
+
+<h2>
+Siap Bikin Bisnis Kamu Lebih Profesional?
+</h2>
+
+<p>
+Mulai dari landing page modern sampai website premium yang bisa bikin bisnis kamu terlihat lebih terpercaya dan menarik customer.
+</p>
+
+<a href="https://wa.me/6281234567890" class="btn btn-primary">
+Order Sekarang
+</a>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 DT Digital Studio — All Rights Reserved
+</footer>
+
+</body>
+</html>
