@@ -1783,6 +1783,518 @@ width:100%;
 
 }
 
+/* =========================================
+   DT STUDIO NEXT LEVEL RESPONSIVE SYSTEM
+========================================= */
+
+html{
+font-size:16px;
+overflow-x:hidden;
+}
+
+body{
+overflow-x:hidden;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+width:100%;
+max-width:1440px;
+margin:auto;
+padding-inline:clamp(16px,4vw,40px);
+}
+
+/* ================= GLOBAL RESPONSIVE ================= */
+
+img{
+max-width:100%;
+display:block;
+}
+
+section{
+overflow:hidden;
+}
+
+.hero,
+.section,
+.cta{
+width:100%;
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.hero h1{
+font-size:clamp(42px,8vw,88px);
+line-height:1.02;
+}
+
+.section-title{
+font-size:clamp(30px,5vw,58px);
+line-height:1.1;
+}
+
+.hero p,
+.section-sub,
+.card p,
+.portfolio-desc{
+font-size:clamp(14px,2vw,18px);
+}
+
+/* ================= HEADER ================= */
+
+header{
+padding:14px 0;
+}
+
+.nav{
+gap:20px;
+}
+
+.logo-wrap{
+min-width:0;
+}
+
+.logo-title{
+font-size:clamp(16px,2vw,22px);
+}
+
+.logo-sub{
+font-size:clamp(8px,1vw,11px);
+}
+
+/* ================= NAV ================= */
+
+.nav-menu{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.nav-menu a{
+font-size:14px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+padding-top:150px;
+padding-bottom:80px;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:clamp(30px,5vw,70px);
+align-items:center;
+}
+
+.hero-action{
+width:100%;
+}
+
+.btn{
+min-height:56px;
+padding:16px 24px;
+font-size:14px;
+}
+
+/* ================= PHONE MOCKUP ================= */
+
+.phone{
+width:min(100%,340px);
+}
+
+/* ================= CARD SYSTEM ================= */
+
+.card,
+.price-card,
+.portfolio-card,
+.admin-card,
+.dash-card,
+.activity-box,
+.admin-box{
+width:100%;
+min-width:0;
+}
+
+.services,
+.pricing,
+.portfolio-grid,
+.dashboard-cards,
+.admin-cards,
+.analytics-grid{
+grid-template-columns:
+repeat(auto-fit,minmax(min(100%,280px),1fr));
+}
+
+/* ================= PORTFOLIO ================= */
+
+.portfolio-grid{
+gap:24px;
+}
+
+.portfolio-preview{
+height:clamp(200px,32vw,280px);
+}
+
+.portfolio-content{
+padding:22px;
+}
+
+.portfolio-top{
+flex-wrap:wrap;
+}
+
+.portfolio-metrics{
+grid-template-columns:repeat(3,1fr);
+}
+
+.metric h4{
+font-size:clamp(18px,3vw,26px);
+}
+
+/* ================= DASHBOARD ================= */
+
+.client-dashboard,
+.admin-panel{
+display:grid;
+grid-template-columns:280px minmax(0,1fr);
+gap:24px;
+align-items:start;
+}
+
+.dashboard-main,
+.admin-main{
+min-width:0;
+}
+
+.dashboard-sidebar,
+.admin-sidebar{
+position:sticky;
+top:100px;
+}
+
+/* ================= ADMIN PROJECT ================= */
+
+.project-form{
+grid-template-columns:
+minmax(0,1fr)
+180px
+160px;
+}
+
+.project-item{
+align-items:flex-start;
+}
+
+.project-info{
+flex:1;
+min-width:0;
+}
+
+.project-info h3{
+word-break:break-word;
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:1100px){
+
+.hero-grid{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.hero p{
+margin-inline:auto;
+}
+
+.hero-action{
+justify-content:center;
+}
+
+.mockup{
+order:-1;
+}
+
+.client-dashboard,
+.admin-panel{
+grid-template-columns:1fr;
+}
+
+.dashboard-sidebar,
+.admin-sidebar{
+position:relative;
+top:auto;
+}
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+html{
+font-size:15px;
+}
+
+/* HEADER */
+
+.nav{
+flex-wrap:wrap;
+justify-content:space-between;
+gap:14px;
+}
+
+.nav-btn{
+width:100%;
+justify-content:center;
+}
+
+/* NAV MOBILE */
+
+.nav-menu{
+display:flex;
+overflow-x:auto;
+width:100%;
+padding-bottom:6px;
+gap:12px;
+scrollbar-width:none;
+}
+
+.nav-menu::-webkit-scrollbar{
+display:none;
+}
+
+.nav-menu a{
+white-space:nowrap;
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.06);
+}
+
+/* HERO */
+
+.hero{
+padding-top:180px;
+}
+
+.hero-action{
+flex-direction:column;
+}
+
+.hero-action .btn{
+width:100%;
+}
+
+/* CARDS */
+
+.card,
+.price-card,
+.portfolio-card,
+.admin-box,
+.activity-box,
+.order-box{
+padding:22px;
+border-radius:26px;
+}
+
+/* DASHBOARD MENU */
+
+.dashboard-menu,
+.admin-nav{
+flex-direction:row;
+overflow-x:auto;
+padding-bottom:4px;
+scrollbar-width:none;
+}
+
+.dashboard-menu::-webkit-scrollbar,
+.admin-nav::-webkit-scrollbar{
+display:none;
+}
+
+.menu-item,
+.admin-link{
+white-space:nowrap;
+min-width:max-content;
+}
+
+/* DASHBOARD TOP */
+
+.dashboard-top,
+.admin-topbar{
+flex-direction:column;
+align-items:stretch;
+}
+
+/* FORMS */
+
+.form-grid,
+.project-form{
+grid-template-columns:1fr;
+}
+
+/* METRICS */
+
+.portfolio-metrics{
+grid-template-columns:1fr;
+}
+
+/* SEARCH */
+
+.admin-search{
+width:100%;
+}
+
+/* CHATBOT */
+
+.chatbot{
+right:12px;
+left:12px;
+bottom:90px;
+width:auto;
+height:75vh;
+border-radius:28px;
+}
+
+.chatbot-toggle{
+right:16px;
+bottom:16px;
+width:64px;
+height:64px;
+}
+
+/* DYNAMIC ISLAND */
+
+.dynamic-island{
+width:92%;
+padding:14px;
+}
+
+/* CTA */
+
+.cta-box{
+padding:50px 22px;
+}
+
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:480px){
+
+.hero{
+padding-top:170px;
+}
+
+.logo-img{
+width:42px;
+height:42px;
+}
+
+.phone{
+width:100%;
+padding:12px;
+border-radius:34px;
+}
+
+.screen{
+border-radius:26px;
+}
+
+.price{
+font-size:44px;
+}
+
+.admin-card h2,
+.dash-card h2,
+.analytic-item h2{
+font-size:34px;
+}
+
+.portfolio-content{
+padding:18px;
+}
+
+.metric{
+padding:14px;
+}
+
+.metric h4{
+font-size:20px;
+}
+
+.btn{
+border-radius:18px;
+}
+
+}
+
+/* ================= ULTRA WIDE ================= */
+
+@media(min-width:1600px){
+
+.container{
+max-width:1600px;
+}
+
+.hero-grid{
+gap:100px;
+}
+
+}
+
+/* ================= SAFE AREA IOS ================= */
+
+@supports(padding:max(0px)){
+
+body,
+header,
+.chatbot,
+.dynamic-island{
+padding-left:max(0px,env(safe-area-inset-left));
+padding-right:max(0px,env(safe-area-inset-right));
+}
+
+.chatbot{
+padding-bottom:max(0px,env(safe-area-inset-bottom));
+}
+
+}
+
+/* ================= SMOOTH PERFORMANCE ================= */
+
+.card,
+.price-card,
+.portfolio-card,
+.admin-card,
+.dash-card,
+.btn,
+.phone{
+will-change:transform;
+transform:translateZ(0);
+}
+
+/* ================= NO OVERFLOW FIX ================= */
+
+.hero-grid,
+.services,
+.pricing,
+.portfolio-grid,
+.client-dashboard,
+.admin-panel,
+.dashboard-cards,
+.admin-cards,
+.analytics-grid{
+min-width:0;
+}
+
+*{
+min-width:0;
+}
+
 </style>
 </head>
 
