@@ -126,6 +126,79 @@ background:linear-gradient(135deg,#fff,#7aa2ff);
 -webkit-text-fill-color:transparent;
 }
 
+/* ================= DT LOGO IMAGE ================= */
+
+.logo-wrap{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo-img{
+width:54px;
+height:54px;
+object-fit:contain;
+filter:
+drop-shadow(0 10px 20px rgba(59,130,246,.35));
+animation:logoFloat 4s ease-in-out infinite;
+}
+
+.logo-text{
+display:flex;
+flex-direction:column;
+line-height:1;
+}
+
+.logo-title{
+font-size:22px;
+font-weight:900;
+letter-spacing:.5px;
+background:linear-gradient(135deg,#fff,#7aa2ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.logo-sub{
+font-size:11px;
+font-weight:700;
+letter-spacing:2px;
+color:#94a3b8;
+margin-top:6px;
+text-transform:uppercase;
+}
+
+@keyframes logoFloat{
+
+0%,100%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-4px);
+}
+
+}
+
+/* ================= HEADER LOGO MOBILE ================= */
+
+@media(max-width:768px){
+
+.logo-img{
+width:46px;
+height:46px;
+}
+
+.logo-title{
+font-size:18px;
+}
+
+.logo-sub{
+font-size:9px;
+letter-spacing:1.5px;
+}
+
+}
+
 .nav-menu{
 display:flex;
 gap:26px;
@@ -1461,8 +1534,26 @@ color:#94a3b8;
 
 <div class="container nav">
 
-<div class="logo">
+<div class="logo-wrap">
+
+<img
+src="logo-dt.png"
+alt="DT Digital Studio"
+class="logo-img"
+>
+
+<div class="logo-text">
+
+<div class="logo-title">
 DT Digital Studio
+</div>
+
+<div class="logo-sub">
+Premium Web Experience
+</div>
+
+</div>
+
 </div>
 
 <div class="nav-menu">
@@ -2058,8 +2149,27 @@ Client bisa memantau progress project, invoice, revisi, dan status website secar
 
 <div class="dashboard-sidebar">
 
-<div class="dashboard-logo">
+<div class="logo-wrap">
+
+<img
+src="logo-dt.png"
+alt=""
+class="logo-img"
+style="width:50px;height:50px;"
+>
+
+<div class="logo-text">
+
+<div class="logo-title">
 DT Client
+</div>
+
+<div class="logo-sub">
+Realtime Dashboard
+</div>
+
+</div>
+
 </div>
 
 <div class="dashboard-menu">
@@ -2425,9 +2535,15 @@ Mulai Sekarang
 
 <div class="loader">
 
-<div class="loader-logo">
-DT
-</div>
+<img
+src="logo-dt.png"
+class="logo-img"
+style="
+width:120px;
+height:120px;
+animation:pulse 2s infinite;
+"
+>
 
 <div class="loader-bar">
 <div class="loader-progress"></div>
