@@ -1372,6 +1372,81 @@ font-size:28px;
 
 }
 
+.portfolio-desc{
+color:#94a3b8;
+line-height:1.8;
+margin-bottom:22px;
+font-size:14px;
+}
+
+.portfolio-live{
+position:absolute;
+top:18px;
+left:18px;
+padding:10px 14px;
+border-radius:999px;
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(20px);
+font-size:12px;
+font-weight:700;
+display:flex;
+align-items:center;
+gap:10px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.live-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#22c55e;
+animation:pulseLive 1s infinite;
+}
+
+@keyframes pulseLive{
+
+0%{
+transform:scale(1);
+opacity:1;
+}
+
+50%{
+transform:scale(1.5);
+opacity:.5;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.portfolio-metrics{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+margin-bottom:22px;
+}
+
+.metric{
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+text-align:center;
+}
+
+.metric h4{
+font-size:24px;
+margin-bottom:6px;
+}
+
+.metric span{
+font-size:12px;
+color:#94a3b8;
+}
+
 </style>
 </head>
 
@@ -1542,30 +1617,30 @@ Sistem order otomatis dengan pembayaran QRIS, Dana, GoPay, dan transfer bank.
 <div class="container">
 
 <h2 class="section-title">
-Portfolio Showcase
+Featured Digital Products
 </h2>
 
 <p class="section-sub">
-Beberapa project premium dari DT Digital Studio dengan tampilan modern, smooth animation, dan dashboard realtime.
+Produk digital premium buatan DT Digital Studio dengan AI automation, realtime system, modern UI, dan Apple-style interaction.
 </p>
 
 <div class="portfolio-grid">
 
-<!-- CARD 1 -->
+<!-- ================= KPR ================= -->
 
 <div class="portfolio-card">
 
 <div class="portfolio-preview">
 
-<img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1200&auto=format&fit=crop"
-alt="portfolio">
+<img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
+<a href="https://dt-pro-web.vercel.app/" class="visit-btn">Open Demo</a>
+</div>
 
-<a href="#" class="visit-btn">
-Live Preview
-</a>
-
+<div class="portfolio-live">
+<div class="live-dot"></div>
+Realtime Active
 </div>
 
 </div>
@@ -1575,89 +1650,65 @@ Live Preview
 <div class="portfolio-top">
 
 <div>
-<h3>Luxury Coffee Website</h3>
-<p>Modern Branding Website</p>
+<h3>Kalkulator KPR Pro</h3>
+<p>Mortgage Simulation Platform</p>
 </div>
 
 <div class="portfolio-status">
-LIVE
+AI TOOL
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+Simulasi cicilan rumah realtime dengan bunga bank, tenor, DP, dan estimasi approval otomatis.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="kprUsers">0</h4>
+<span>Users</span>
+</div>
+
+<div class="metric">
+<h4 id="kprCalc">0</h4>
+<span>Simulasi</span>
+</div>
+
+<div class="metric">
+<h4>24/7</h4>
+<span>Online</span>
 </div>
 
 </div>
 
 <div class="portfolio-tags">
-
-<span>Landing Page</span>
+<span>Finance</span>
 <span>PWA</span>
-<span>Animation</span>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 2 -->
-
-<div class="portfolio-card">
-
-<div class="portfolio-preview">
-
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
-alt="portfolio">
-
-<div class="portfolio-overlay">
-
-<a href="#" class="visit-btn">
-Open Website
-</a>
-
-</div>
-
-</div>
-
-<div class="portfolio-content">
-
-<div class="portfolio-top">
-
-<div>
-<h3>Corporate Dashboard</h3>
-<p>Analytics & Admin Panel</p>
-</div>
-
-<div class="portfolio-status">
-NEW
-</div>
-
-</div>
-
-<div class="portfolio-tags">
-
-<span>Dashboard</span>
 <span>Realtime</span>
-<span>Admin</span>
-
+<span>AI</span>
 </div>
 
 </div>
 
 </div>
 
-<!-- CARD 3 -->
+<!-- ================= PROPERTY ================= -->
 
 <div class="portfolio-card">
 
 <div class="portfolio-preview">
 
-<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
-alt="portfolio">
+<img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=1200&auto=format&fit=crop">
 
 <div class="portfolio-overlay">
+<a href="https://dhitopropertyid.netlify.app/" class="visit-btn">Visit Website</a>
+</div>
 
-<a href="#" class="visit-btn">
-Visit Site
-</a>
-
+<div class="portfolio-live">
+<div class="live-dot"></div>
+Live Market
 </div>
 
 </div>
@@ -1667,22 +1718,316 @@ Visit Site
 <div class="portfolio-top">
 
 <div>
-<h3>Digital Agency UI</h3>
-<p>Apple Inspired Experience</p>
+<h3>Web Property Luxury</h3>
+<p>Real Estate Showcase</p>
 </div>
 
 <div class="portfolio-status">
-PRO
+PREMIUM
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+Website property modern dengan gallery premium, WhatsApp lead system, dan auto inquiry.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="propertyView">0</h4>
+<span>Views</span>
+</div>
+
+<div class="metric">
+<h4 id="propertyLead">0</h4>
+<span>Leads</span>
+</div>
+
+<div class="metric">
+<h4>SEO</h4>
+<span>Optimized</span>
 </div>
 
 </div>
 
 <div class="portfolio-tags">
-
+<span>Property</span>
 <span>Luxury UI</span>
-<span>Glassmorphism</span>
 <span>SEO</span>
+<span>Lead System</span>
+</div>
 
+</div>
+
+</div>
+
+<!-- ================= FINANCIAL ================= -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop">
+
+<div class="portfolio-overlay">
+<a href="https://dhitoid.github.io/catatan-keuangan/" class="visit-btn">Open App</a>
+</div>
+
+<div class="portfolio-live">
+<div class="live-dot"></div>
+Realtime Sync
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>Financial Tracker</h3>
+<p>Smart Money Dashboard</p>
+</div>
+
+<div class="portfolio-status">
+PWA APP
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+Aplikasi tracking keuangan realtime dengan analytics cashflow modern dan installable PWA.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="financeUsers">0</h4>
+<span>Active</span>
+</div>
+
+<div class="metric">
+<h4 id="financeMoney">0</h4>
+<span>Tracked</span>
+</div>
+
+<div class="metric">
+<h4>99%</h4>
+<span>Speed</span>
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+<span>Finance</span>
+<span>Dashboard</span>
+<span>PWA</span>
+<span>Analytics</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= WEDDING ================= -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop">
+
+<div class="portfolio-overlay">
+<a href="https://dhitoid.github.io/sample-wedding/" class="visit-btn">View Invitation</a>
+</div>
+
+<div class="portfolio-live">
+<div class="live-dot"></div>
+Guest Online
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>Wedding Invitation</h3>
+<p>Digital Invitation Website</p>
+</div>
+
+<div class="portfolio-status">
+TRENDING
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+Undangan digital premium dengan backsound, RSVP, countdown, dan live gallery couple.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="guestCount">0</h4>
+<span>Guests</span>
+</div>
+
+<div class="metric">
+<h4 id="rsvpCount">0</h4>
+<span>RSVP</span>
+</div>
+
+<div class="metric">
+<h4>HD</h4>
+<span>Gallery</span>
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+<span>Wedding</span>
+<span>Animation</span>
+<span>Music</span>
+<span>RSVP</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= AI PROPERTY ================= -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop">
+
+<div class="portfolio-overlay">
+<a href="https://nexora-ai-generator.vercel.app/" class="visit-btn">Try AI</a>
+</div>
+
+<div class="portfolio-live">
+<div class="live-dot"></div>
+AI Generating
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>AI Property Generator</h3>
+<p>AI Description Tool</p>
+</div>
+
+<div class="portfolio-status">
+GPT AI
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+AI tool untuk generate deskripsi property otomatis hanya dari input spesifikasi rumah.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="aiGenerate">0</h4>
+<span>Generated</span>
+</div>
+
+<div class="metric">
+<h4>AI</h4>
+<span>Powered</span>
+</div>
+
+<div class="metric">
+<h4>Fast</h4>
+<span>Output</span>
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+<span>AI</span>
+<span>Copywriting</span>
+<span>Property</span>
+<span>Automation</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= AI IMAGE ================= -->
+
+<div class="portfolio-card">
+
+<div class="portfolio-preview">
+
+<img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=1200&auto=format&fit=crop">
+
+<div class="portfolio-overlay">
+<a href="https://dhitoid.github.io/dt-image-tools/" class="visit-btn">Generate Now</a>
+</div>
+
+<div class="portfolio-live">
+<div class="live-dot"></div>
+AI Rendering
+</div>
+
+</div>
+
+<div class="portfolio-content">
+
+<div class="portfolio-top">
+
+<div>
+<h3>AI Image Generator</h3>
+<p>Realtime AI Image Platform</p>
+</div>
+
+<div class="portfolio-status">
+ULTRA AI
+</div>
+
+</div>
+
+<div class="portfolio-desc">
+Generate gambar AI premium dengan cinematic prompt, realtime rendering, dan export HD.
+</div>
+
+<div class="portfolio-metrics">
+
+<div class="metric">
+<h4 id="imageGenerate">0</h4>
+<span>Images</span>
+</div>
+
+<div class="metric">
+<h4>4K</h4>
+<span>Export</span>
+</div>
+
+<div class="metric">
+<h4>Fast</h4>
+<span>Render</span>
+</div>
+
+</div>
+
+<div class="portfolio-tags">
+<span>AI Image</span>
+<span>Generator</span>
+<span>Realtime</span>
+<span>Creative</span>
 </div>
 
 </div>
@@ -2722,6 +3067,92 @@ showIsland(
 'DT AI Assistant',
 'AI Customer Service aktif 🚀'
 );
+
+},4000);
+
+/* ================= REALTIME PORTFOLIO ================= */
+
+function animateValue(id,start,end,duration,prefix=''){
+
+const obj=document.getElementById(id);
+
+if(!obj) return;
+
+let startTime=null;
+
+function update(currentTime){
+
+if(!startTime) startTime=currentTime;
+
+const progress=Math.min((currentTime-startTime)/duration,1);
+
+const value=Math.floor(progress*(end-start)+start);
+
+obj.innerHTML=prefix + value.toLocaleString();
+
+if(progress<1){
+
+requestAnimationFrame(update);
+
+}
+
+}
+
+requestAnimationFrame(update);
+
+}
+
+/* ================= INITIAL ================= */
+
+animateValue('kprUsers',0,2847,2500);
+animateValue('kprCalc',0,11294,3000);
+
+animateValue('propertyView',0,58294,3200);
+animateValue('propertyLead',0,1248,2600);
+
+animateValue('financeUsers',0,984,2500);
+animateValue('financeMoney',0,284,2800,'Rp ');
+
+animateValue('guestCount',0,1268,2800);
+animateValue('rsvpCount',0,894,2600);
+
+animateValue('aiGenerate',0,28942,3200);
+animateValue('imageGenerate',0,11822,3500);
+
+/* ================= REALTIME RANDOM UPDATE ================= */
+
+setInterval(()=>{
+
+const randomAdd=(id,max)=>{
+
+const el=document.getElementById(id);
+
+if(!el) return;
+
+let current=
+parseInt(
+el.innerText.replace(/\D/g,'')
+);
+
+current+=Math.floor(Math.random()*max)+1;
+
+el.innerText=current.toLocaleString();
+
+};
+
+randomAdd('kprUsers',5);
+randomAdd('kprCalc',20);
+
+randomAdd('propertyView',30);
+randomAdd('propertyLead',3);
+
+randomAdd('financeUsers',2);
+
+randomAdd('guestCount',4);
+randomAdd('rsvpCount',2);
+
+randomAdd('aiGenerate',40);
+randomAdd('imageGenerate',30);
 
 },4000);
 
