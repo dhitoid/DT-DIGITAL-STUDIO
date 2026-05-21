@@ -2295,6 +2295,16 @@ min-width:0;
 min-width:0;
 }
 
+#secretAdminTrigger{
+position:fixed;
+top:0;
+right:0;
+width:40px;
+height:40px;
+z-index:1;
+opacity:0;
+}
+
 </style>
 </head>
 
@@ -2337,7 +2347,6 @@ Premium Web Experience
 <a href="#portfolio">Portfolio</a>
 <a href="#pricing">Pricing</a>
 <a href="#order">Order</a>
-<a href="#admin" id="adminNavBtn" style="display:none;"> Admin Panel </a>
 </div>
 
 <a href="#order" class="nav-btn">
@@ -3399,7 +3408,7 @@ Lanjut Pembayaran
 
 <!-- ================= ADMIN LOGIN ================= -->
 
-<section class="section" id="adminLogin">
+<section class="section" id="adminLogin" style="display:none;">
 
 <div class="container">
 
@@ -3445,7 +3454,7 @@ Login Admin
 
 <!-- ================= ADMIN PANEL ================= -->
 
-<section class="section" id="admin" style="display:none;">
+<section class="section" id="admin" data-admin="locked" style="display:none;">
 
 <div class="container">
 
@@ -3489,7 +3498,7 @@ Manage client project, payment, activity, dan realtime analytics dalam satu dash
 ⚙ Settings
 </div>
 
-<div class="admin-link" id="logoutAdmin">
+<div class="admin-link" id="stealthLogout">
 🚪 Logout
 </div>
 
@@ -3876,6 +3885,8 @@ placeholder="Tulis pesan atau gunakan mic..."
 </div>
 
 </div>
+
+<div id="secretAdminTrigger"></div>
 
 <!-- ================= SCRIPT ================= -->
 
@@ -5086,16 +5097,16 @@ checkAdminLogin();
 /* ================= LOGOUT ================= */
 
 document
-.getElementById('logoutAdmin')
-.addEventListener('click',()=>{
+.getElementById('stealthLogout')
+?.addEventListener('click',()=>{
 
 localStorage.removeItem(
-'dt-admin-login'
+'dt-stealth-admin'
 );
 
 showIsland(
-'Logout Success',
-'Admin berhasil logout'
+'Admin Logout',
+'Stealth mode disabled'
 );
 
 setTimeout(()=>{
@@ -5103,6 +5114,165 @@ setTimeout(()=>{
 location.reload();
 
 },1200);
+
+});
+
+/* ================= DT STEALTH ADMIN SYSTEM ================= */
+
+const ADMIN_ACCESS_KEY = "DT-STUDIO-2026";
+
+const ADMIN_USERS = [
+"admin@dtstudio.id",
+"dhito@dtstudio.id"
+];
+
+/* ================= STATE ================= */
+
+let adminTapCount = 0;
+
+/* ================= SECRET TRIGGER ================= */
+
+document
+.getElementById('secretAdminTrigger')
+.addEventListener('click',()=>{
+
+adminTapCount++;
+
+if(adminTapCount >= 5){
+
+openAdminAccess();
+
+adminTapCount = 0;
+
+}
+
+});
+
+/* ================= OPEN LOGIN ================= */
+
+function openAdminAccess(){
+
+const email = prompt(
+'Masukkan email admin'
+);
+
+if(!email) return;
+
+if(!ADMIN_USERS.includes(email.toLowerCase())){
+
+showIsland(
+'Access Denied',
+'Email tidak terdaftar'
+);
+
+return;
+
+}
+
+const accessKey = prompt(
+'Masukkan access key'
+);
+
+if(accessKey !== ADMIN_ACCESS_KEY){
+
+showIsland(
+'Access Denied',
+'Access key salah'
+);
+
+return;
+
+}
+
+enableStealthAdmin();
+
+}
+
+/* ================= ENABLE ADMIN ================= */
+
+function enableStealthAdmin(){
+
+localStorage.setItem(
+'dt-stealth-admin',
+'true'
+);
+
+document
+.getElementById('admin')
+.style.display='block';
+
+document
+.getElementById('adminLogin')
+.style.display='block';
+
+showIsland(
+'Admin Mode Active',
+'Stealth admin unlocked 🚀'
+);
+
+}
+
+/* ================= AUTO LOGIN ================= */
+
+window.addEventListener('load',()=>{
+
+const isAdmin =
+localStorage.getItem('dt-stealth-admin');
+
+if(isAdmin === 'true'){
+
+document
+.getElementById('admin')
+.style.display='block';
+
+document
+.getElementById('adminLogin')
+.style.display='block';
+
+}
+
+});
+
+/* ================= BASIC DEVTOOLS BLOCK ================= */
+
+document.addEventListener('contextmenu',e=>{
+e.preventDefault();
+});
+
+document.addEventListener('keydown',(e)=>{
+
+if(
+e.key === 'F12' ||
+(e.ctrlKey && e.shiftKey && e.key === 'I') ||
+(e.ctrlKey && e.shiftKey && e.key === 'J') ||
+(e.ctrlKey && e.key === 'U')
+){
+
+e.preventDefault();
+
+showIsland(
+'Blocked',
+'Developer tools disabled'
+);
+
+}
+
+});
+
+/* ================= REMOVE ADMIN UI ================= */
+
+window.addEventListener('DOMContentLoaded',()=>{
+
+const isAdmin =
+localStorage.getItem('dt-stealth-admin');
+
+if(isAdmin !== 'true'){
+
+document
+.querySelectorAll('[data-admin="locked"]')
+.forEach(el=>el.remove());
+
+}
 
 });
 
