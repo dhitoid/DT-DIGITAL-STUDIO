@@ -3945,30 +3945,47 @@ document.querySelector('.blur.two')
 
 window.addEventListener('load',()=>{
 
+const loader = document.querySelector('.loader');
+
 document.body.style.overflow='hidden';
 
 setTimeout(()=>{
 
-const loader =
-document.querySelector('.loader');
-
 if(loader){
 
 loader.style.opacity='0';
+loader.style.pointerEvents='none';
 
 setTimeout(()=>{
 
-loader.remove();
+loader.style.display='none';
+document.body.style.overflow='auto';
+
+},700);
+
+}else{
 
 document.body.style.overflow='auto';
 
-},1000);
+}
+
+},1200);
+
+});
+
+/* fallback anti stuck */
+setTimeout(()=>{
+
+const loader = document.querySelector('.loader');
+
+if(loader){
+
+loader.style.display='none';
+document.body.style.overflow='auto';
 
 }
 
-},1800);
-
-});
+},5000);
 
 /* ================= DYNAMIC ISLAND ================= */
 
@@ -5038,9 +5055,12 @@ document
 .getElementById('admin')
 .style.display='block';
 
-document
-.getElementById('adminNavBtn')
-.style.display='inline-flex';
+const adminNavBtn =
+document.getElementById('adminNavBtn');
+
+if(adminNavBtn){
+adminNavBtn.style.display='inline-flex';
+}
 
 showIsland(
 'Admin Login Success',
@@ -5132,9 +5152,11 @@ let adminTapCount = 0;
 
 /* ================= SECRET TRIGGER ================= */
 
-document
-.getElementById('secretAdminTrigger')
-.addEventListener('click',()=>{
+const secretTrigger = document.getElementById('secretAdminTrigger');
+
+if(secretTrigger){
+
+secretTrigger.addEventListener('click',()=>{
 
 adminTapCount++;
 
@@ -5147,6 +5169,8 @@ adminTapCount = 0;
 }
 
 });
+
+}
 
 /* ================= OPEN LOGIN ================= */
 
@@ -5287,7 +5311,7 @@ const ADMIN_EMAILS = [
 'dhito@dtstudio.com'
 ];
 
-const ADMIN_ACCESS_KEY = 'DT-ULTRA-2026';
+const ADMIN_ACCESS_KEY_V2 = 'DT-ULTRA-2026';
 
 const STORAGE_KEY = 'dt-secure-session';
 
@@ -5444,7 +5468,7 @@ return;
 const key =
 prompt('Access Key');
 
-if(key !== ADMIN_ACCESS_KEY){
+if(key !== ADMIN_ACCESS_KEY_V2){
 
 showIsland(
 'Access Denied',
