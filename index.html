@@ -1569,7 +1569,7 @@ min-width:max-content;
 /* ================= ADMIN PANEL ================= */
 
 .admin-panel{
-display:grid;
+display:none;
 grid-template-columns:280px 1fr;
 gap:28px;
 margin-top:40px;
@@ -2337,7 +2337,7 @@ Premium Web Experience
 <a href="#portfolio">Portfolio</a>
 <a href="#pricing">Pricing</a>
 <a href="#order">Order</a>
-<a href="#admin">Admin Panel</a>
+<a href="#admin" id="adminNavBtn" style="display:none;"> Admin Panel </a>
 </div>
 
 <a href="#order" class="nav-btn">
@@ -3397,9 +3397,55 @@ Lanjut Pembayaran
 
 </section>
 
+<!-- ================= ADMIN LOGIN ================= -->
+
+<section class="section" id="adminLogin">
+
+<div class="container">
+
+<h2 class="section-title">
+Admin Secure Access
+</h2>
+
+<p class="section-sub">
+Hanya admin DT Studio yang dapat mengakses dashboard management.
+</p>
+
+<div class="order-box" style="max-width:520px;">
+
+<input
+type="text"
+id="adminUsername"
+class="input"
+placeholder="Username Admin"
+style="margin-bottom:18px;"
+>
+
+<input
+type="password"
+id="adminPassword"
+class="input"
+placeholder="Password"
+style="margin-bottom:24px;"
+>
+
+<button
+class="btn btn-primary"
+style="width:100%;"
+id="adminLoginBtn"
+>
+Login Admin
+</button>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- ================= ADMIN PANEL ================= -->
 
-<section class="section" id="admin">
+<section class="section" id="admin" style="display:none;">
 
 <div class="container">
 
@@ -3441,6 +3487,10 @@ Manage client project, payment, activity, dan realtime analytics dalam satu dash
 
 <div class="admin-link" data-admin="settings">
 ⚙ Settings
+</div>
+
+<div class="admin-link" id="logoutAdmin">
+🚪 Logout
 </div>
 
 </div>
@@ -4670,6 +4720,14 @@ projectList.innerHTML+=`
 
 <h3>${project.name}</h3>
 
+<p style="
+margin-top:6px;
+color:#94a3b8;
+font-size:13px;
+">
+${project.createdAt || ''}
+</p>
+
 <div class="project-status">
 ${project.status}
 </div>
@@ -4734,9 +4792,26 @@ document.getElementById('projectStatus')
 
 if(!name) return;
 
+const alreadyExists =
+projects.some(
+p=>p.name.toLowerCase()===name.toLowerCase()
+);
+
+if(alreadyExists){
+
+showIsland(
+'Duplicate Project',
+'Project sudah ada'
+);
+
+return;
+
+}
+
 projects.unshift({
 name,
-status
+status,
+createdAt:new Date().toLocaleString()
 });
 
 renderProjects();
@@ -4920,6 +4995,116 @@ Math.floor(Math.random()*adminLogs.length)
 addAdminActivity(random);
 
 },8000);
+
+/* ================= ADMIN AUTH ================= */
+
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "dtstudio123";
+
+/* ================= CHECK LOGIN ================= */
+
+function checkAdminLogin(){
+
+const isAdmin =
+localStorage.getItem('dt-admin-login');
+
+if(isAdmin === 'true'){
+
+enableAdminAccess();
+
+}
+
+}
+
+/* ================= ENABLE ADMIN ================= */
+
+function enableAdminAccess(){
+
+document.querySelector('.admin-panel')
+.style.display='grid';
+
+document
+.getElementById('admin')
+.style.display='block';
+
+document
+.getElementById('adminNavBtn')
+.style.display='inline-flex';
+
+showIsland(
+'Admin Login Success',
+'Welcome back admin 🚀'
+);
+
+}
+
+/* ================= LOGIN BUTTON ================= */
+
+document
+.getElementById('adminLoginBtn')
+.addEventListener('click',()=>{
+
+const username =
+document.getElementById('adminUsername')
+.value;
+
+const password =
+document.getElementById('adminPassword')
+.value;
+
+if(
+username === ADMIN_USERNAME &&
+password === ADMIN_PASSWORD
+){
+
+localStorage.setItem(
+'dt-admin-login',
+'true'
+);
+
+enableAdminAccess();
+
+document
+.getElementById('adminLogin')
+.style.display='none';
+
+}else{
+
+showIsland(
+'Access Denied',
+'Username atau password salah ❌'
+);
+
+}
+
+});
+
+/* ================= AUTO CHECK ================= */
+
+checkAdminLogin();
+
+/* ================= LOGOUT ================= */
+
+document
+.getElementById('logoutAdmin')
+.addEventListener('click',()=>{
+
+localStorage.removeItem(
+'dt-admin-login'
+);
+
+showIsland(
+'Logout Success',
+'Admin berhasil logout'
+);
+
+setTimeout(()=>{
+
+location.reload();
+
+},1200);
+
+});
 
 </script>
 
