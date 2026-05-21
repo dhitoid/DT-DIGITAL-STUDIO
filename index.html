@@ -3945,16 +3945,28 @@ document.querySelector('.blur.two')
 
 window.addEventListener('load',()=>{
 
-setTimeout(()=>{
-
-document.querySelector('.loader')
-.style.opacity='0';
+document.body.style.overflow='hidden';
 
 setTimeout(()=>{
-document.querySelector('.loader').remove();
+
+const loader =
+document.querySelector('.loader');
+
+if(loader){
+
+loader.style.opacity='0';
+
+setTimeout(()=>{
+
+loader.remove();
+
+document.body.style.overflow='auto';
+
 },1000);
 
-},2500);
+}
+
+},1800);
 
 });
 
@@ -5336,12 +5348,9 @@ Date.now() + (1000 * 60 * 60 * 6)
 
 };
 
-const encrypted =
-encryptData(payload);
-
-localStorage.setItem(
+secureSet(
 STORAGE_KEY,
-encrypted
+payload
 );
 
 }
@@ -5350,13 +5359,8 @@ encrypted
 
 function getAdminSession(){
 
-const encrypted =
-localStorage.getItem(STORAGE_KEY);
-
-if(!encrypted) return false;
-
 const data =
-decryptData(encrypted);
+secureGet(STORAGE_KEY);
 
 if(!data) return false;
 
@@ -5498,28 +5502,30 @@ location.reload();
 
 }
 
-/* ================= STORAGE PROTECT ================= */
+/* ================= SAFE STORAGE ================= */
 
-(function(){
+function secureSet(key,data){
 
-const originalSetItem =
-localStorage.setItem;
+const encrypted =
+encryptData(data);
 
-localStorage.setItem = function(key,value){
-
-if(key === STORAGE_KEY){
-
-value = encryptData({
-secure:value
-});
+localStorage.setItem(
+key,
+encrypted
+);
 
 }
 
-originalSetItem.apply(this,[key,value]);
+function secureGet(key){
 
-};
+const data =
+localStorage.getItem(key);
 
-})();
+if(!data) return null;
+
+return decryptData(data);
+
+}
 
 /* ================= AUTO CLEAR IF TAB CLOSED ================= */
 
