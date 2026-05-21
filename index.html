@@ -2295,16 +2295,6 @@ min-width:0;
 min-width:0;
 }
 
-#secretAdminTrigger{
-position:fixed;
-top:0;
-right:0;
-width:40px;
-height:40px;
-z-index:1;
-opacity:0;
-}
-
 </style>
 </head>
 
@@ -2319,7 +2309,7 @@ opacity:0;
 
 <div class="container nav">
 
-<div class="logo-wrap">
+<div class="logo-wrap" id="secretLogo">
 
 <img
 src="logo-dt.PNG"
@@ -3886,8 +3876,6 @@ placeholder="Tulis pesan atau gunakan mic..."
 
 </div>
 
-<div id="secretAdminTrigger"></div>
-
 <!-- ================= SCRIPT ================= -->
 
 <script>
@@ -5271,6 +5259,291 @@ if(isAdmin !== 'true'){
 document
 .querySelectorAll('[data-admin="locked"]')
 .forEach(el=>el.remove());
+
+}
+
+});
+
+/* =========================================
+   DT ENCRYPTED STEALTH ADMIN SYSTEM
+========================================= */
+
+/* ================= CONFIG ================= */
+
+const ADMIN_EMAILS = [
+'admin@dtstudio.com',
+'dhito@dtstudio.com'
+];
+
+const ADMIN_ACCESS_KEY = 'DT-ULTRA-2026';
+
+const STORAGE_KEY = 'dt-secure-session';
+
+const SECRET_SALT = 'dt-ultra-encrypt-v7';
+
+/* ================= ENCRYPT FUNCTION ================= */
+
+function encryptData(data){
+
+const text =
+JSON.stringify(data) + SECRET_SALT;
+
+return btoa(
+unescape(
+encodeURIComponent(text)
+)
+);
+
+}
+
+/* ================= DECRYPT FUNCTION ================= */
+
+function decryptData(data){
+
+try{
+
+const decoded =
+decodeURIComponent(
+escape(
+atob(data)
+)
+);
+
+return JSON.parse(
+decoded.replace(SECRET_SALT,'')
+);
+
+}catch{
+
+return null;
+
+}
+
+}
+
+/* ================= SAVE SESSION ================= */
+
+function saveAdminSession(){
+
+const payload = {
+
+admin:true,
+
+time:Date.now(),
+
+expires:
+Date.now() + (1000 * 60 * 60 * 6)
+
+};
+
+const encrypted =
+encryptData(payload);
+
+localStorage.setItem(
+STORAGE_KEY,
+encrypted
+);
+
+}
+
+/* ================= CHECK SESSION ================= */
+
+function getAdminSession(){
+
+const encrypted =
+localStorage.getItem(STORAGE_KEY);
+
+if(!encrypted) return false;
+
+const data =
+decryptData(encrypted);
+
+if(!data) return false;
+
+if(Date.now() > data.expires){
+
+localStorage.removeItem(STORAGE_KEY);
+
+return false;
+
+}
+
+return data.admin === true;
+
+}
+
+/* ================= ENABLE ADMIN ================= */
+
+function enableAdminMode(){
+
+const adminSection =
+document.getElementById('admin');
+
+if(adminSection){
+
+adminSection.style.display='block';
+
+}
+
+showIsland(
+'Admin Mode Active',
+'Encrypted admin session enabled 🚀'
+);
+
+}
+
+/* ================= SECRET LOGO TAP ================= */
+
+let logoTap = 0;
+
+const secretLogo =
+document.getElementById('secretLogo');
+
+secretLogo.addEventListener('click',()=>{
+
+logoTap++;
+
+if(logoTap >= 5){
+
+logoTap = 0;
+
+openStealthLogin();
+
+}
+
+});
+
+/* ================= OPEN LOGIN ================= */
+
+function openStealthLogin(){
+
+const email =
+prompt('Admin Email');
+
+if(!email) return;
+
+if(
+!ADMIN_EMAILS.includes(
+email.toLowerCase()
+)
+){
+
+showIsland(
+'Access Denied',
+'Email tidak terdaftar'
+);
+
+return;
+
+}
+
+const key =
+prompt('Access Key');
+
+if(key !== ADMIN_ACCESS_KEY){
+
+showIsland(
+'Access Denied',
+'Access key salah'
+);
+
+return;
+
+}
+
+saveAdminSession();
+
+enableAdminMode();
+
+}
+
+/* ================= AUTO LOGIN ================= */
+
+window.addEventListener('load',()=>{
+
+const isAdmin =
+getAdminSession();
+
+if(isAdmin){
+
+enableAdminMode();
+
+}
+
+});
+
+/* ================= LOGOUT ================= */
+
+const logoutBtn =
+document.getElementById('stealthLogout');
+
+if(logoutBtn){
+
+logoutBtn.addEventListener('click',()=>{
+
+localStorage.removeItem(STORAGE_KEY);
+
+showIsland(
+'Logout Success',
+'Encrypted session removed'
+);
+
+setTimeout(()=>{
+
+location.reload();
+
+},1200);
+
+});
+
+}
+
+/* ================= STORAGE PROTECT ================= */
+
+(function(){
+
+const originalSetItem =
+localStorage.setItem;
+
+localStorage.setItem = function(key,value){
+
+if(key === STORAGE_KEY){
+
+value = encryptData({
+secure:value
+});
+
+}
+
+originalSetItem.apply(this,[key,value]);
+
+};
+
+})();
+
+/* ================= AUTO CLEAR IF TAB CLOSED ================= */
+
+window.addEventListener('beforeunload',()=>{
+
+sessionStorage.setItem(
+'dt-tab-close',
+'true'
+);
+
+});
+
+window.addEventListener('load',()=>{
+
+const closed =
+sessionStorage.getItem(
+'dt-tab-close'
+);
+
+if(closed){
+
+sessionStorage.removeItem(
+'dt-tab-close'
+);
 
 }
 
